@@ -59,7 +59,7 @@
                     <li class="item-list">Control de personal</li>
                 </a>
                 <a href="../view/Empleados.php">
-                    <li class="item-list">Empleados</li>
+                    <li class="item-list">Empleados registrados</li>
                 </a>
                 <a href="">
                     <li class="item-list">Cerrar sesion</li>

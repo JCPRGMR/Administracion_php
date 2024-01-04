@@ -1,0 +1,12 @@
+
+a:nth-child(3) .item-list{
+    background-color: white;
+    color: black;
+}
+main{
+    flex-direction: column;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}

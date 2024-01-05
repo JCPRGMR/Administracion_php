@@ -73,7 +73,6 @@
         }
     }
 </style>
-<a href="Empleados_pdf.php" class="btn float bg-black-blue" target="_blank">PDF</a>
 <div class="head">
     <!-- <a href="" id="open-modal" onclick="localStorage.clear()">Agregar empleados</a> -->
     <div class="container-camps p10">

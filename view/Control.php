@@ -30,7 +30,7 @@
     }
 </style>
 <div class="header">
-    <a href="" class="btn bg-black-blue">
+    <a href="Control_insertar.php" class="btn bg-black-blue">
         Nuevo registro
     </a>
     <form action="" method="post">

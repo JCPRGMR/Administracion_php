@@ -1,4 +1,5 @@
 <?php include("../templates/header.php")?>
+<?php include("../response/Omisiones.php")?>
 <link rel="stylesheet" href="../css/styles2.css">
 <style>
     a:nth-child(1) .item-list{
@@ -30,7 +31,7 @@
         background-color: royalblue;
     }
 </style>
-<form action="" method="post" class="form">
+<form action="../request/Omisiones.php" method="post" class="form">
     <header class="p20 uper-bold">
         Registro de omision
     </header>
@@ -39,8 +40,12 @@
             <label for="" class="w-t bg-black-blue">
                 Empleado
             </label>
-            <select name="" id="empleados" class="campo" required>
-                <option value=""></option>
+            <select name="empleado" id="empleados" class="campo" required>
+                <?php foreach(Empleados::Mostrar() as $item): ?>
+                    <option value="<?= $item->id_empleado ?>">
+                        <?= $item->nombres . ' | ' . $item->des_area ?>
+                    </option>
+                <?php endforeach ?>
             </select>
             <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
@@ -48,38 +53,42 @@
             <label for="" class="w-t bg-black-blue">
                 Ciudad
             </label>
-            <select name="" id="ciudad" class="campo" required>
-                <option value=""></option>
+            <select name="ciudad" id="ciudad" class="campo" required>
+                <?php foreach(Ciudades::Mostrar() as $item): ?>
+                <option value="<?= $item->id_ciudad ?>">
+                    <?= $item->des_ciudad ?>
+                </option>
+                <?php endforeach; ?>
             </select>
-            <a href="" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
+            <a href="Ciudades.php" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
         <div name="" id="" class="select-w-btn">
             <label for="" class="w-t bg-black-blue" style="white-space: nowrap;">
                 Tiempo
             </label>
-            <input type="number" name="" id="tiempo" class="campo" required>
-            <select name="" id="" class="campo w-t bg-black-blue" required>
-                <option value="">Minutos</option>
-                <option value="">Horas</option>
+            <input type="number" name="tiempo" id="tiempo" class="campo" required>
+            <select name="medida" id="" class="campo w-t bg-black-blue">
+                <option value="minuto(s)">Minutos</option>
+                <option value="hora(s)">Horas</option>
             </select>
         </div>
     </div>
     <div class="container-camps">
         <div class="radio">
-            <input type="checkbox" name="" class="b_chek" id="Ingreso">
+            <input type="checkbox" name="Ingreso" class="b_chek" id="Ingreso">
             <label for="Ingreso" class="check">Ingreso</label>
         </div>
         <div class="radio">
-            <input type="checkbox" name="" class="b_chek" id="Salida">
+            <input type="checkbox" name="Salida" class="b_chek" id="Salida">
             <label for="Salida" class="check">Salida</label>
         </div>
         <div class="radio">
-            <input type="checkbox" name="" class="b_chek" id="Marcacion">
+            <input type="checkbox" name="Marcacion" class="b_chek" id="Marcacion">
             <label for="Marcacion" class="check">Marcacion</label>
         </div>
     </div>
     <div class="container-camps">
-        <textarea name="" id="justificacion" cols="30" rows="10" placeholder="Justificacion" class="input-w-t campo" required></textarea>
+        <textarea name="justificacion" id="justificacion" cols="30" rows="10" placeholder="Justificacion" class="input-w-t campo" required></textarea>
     </div>
     <div class="container-camps">
         <button type="submit" class="btn bg-black-blue">Regsitrar</button>

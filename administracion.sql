@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 04, 2024 at 08:44 PM
+-- Generation Time: Jan 08, 2024 at 01:35 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -83,6 +83,33 @@ CREATE TABLE `ciudades` (
   `alter_ciudad` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `ciudades`
+--
+
+INSERT INTO `ciudades` (`id_ciudad`, `des_ciudad`, `f_registro_ciudad`, `h_registro_ciudad`, `alter_ciudad`) VALUES
+(1, 'La Paz', '2024-01-08', '09:01:12', '2024-01-08 09:01:12'),
+(2, 'El alto', '2024-01-08', '09:05:40', '2024-01-08 09:05:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `controles`
+--
+
+CREATE TABLE `controles` (
+  `id_control` int NOT NULL,
+  `ingreso` time NOT NULL,
+  `registro_ingreso` datetime NOT NULL,
+  `salida` time NOT NULL,
+  `registro_salida` datetime NOT NULL,
+  `id_fk_empleado` bigint NOT NULL,
+  `id_fk_ciudad` int NOT NULL,
+  `f_registro_control` date NOT NULL,
+  `h_registro_control` time NOT NULL,
+  `alter_control` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -127,6 +154,27 @@ INSERT INTO `empleados` (`id_empleado`, `nombres`, `apellidos`, `ci`, `expedido`
 (17, 'Beimar', 'Brito', 123, 'LA PAZ', 6704896, 1, 3, '2024-01-04', '14:24:09', '2024-01-04 14:24:09'),
 (18, 'Beimar', 'Brito', 123, 'LA PAZ', 6704896, 1, 3, '2024-01-04', '14:24:09', '2024-01-04 14:24:09'),
 (19, 'Beimar', 'Brito', 123, 'LA PAZ', 6704896, 1, 3, '2024-01-04', '14:24:09', '2024-01-04 14:24:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `omisiones`
+--
+
+CREATE TABLE `omisiones` (
+  `id_omision` int NOT NULL,
+  `justificacion` text NOT NULL,
+  `tiempo_omision` int NOT NULL,
+  `medida` varchar(250) NOT NULL,
+  `ingreso` int DEFAULT NULL,
+  `salida` int DEFAULT NULL,
+  `marcacion` int DEFAULT NULL,
+  `id_fk_empleado` bigint NOT NULL,
+  `id_fk_ciudad` int NOT NULL,
+  `f_registro_omision` date NOT NULL,
+  `h_registro_omision` time NOT NULL,
+  `alter_omision` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -264,12 +312,28 @@ ALTER TABLE `ciudades`
   ADD PRIMARY KEY (`id_ciudad`);
 
 --
+-- Indexes for table `controles`
+--
+ALTER TABLE `controles`
+  ADD PRIMARY KEY (`id_control`),
+  ADD KEY `id_fk_empleado` (`id_fk_empleado`),
+  ADD KEY `id_fk_ciudad` (`id_fk_ciudad`);
+
+--
 -- Indexes for table `empleados`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id_empleado`),
   ADD KEY `id_fk_area` (`id_fk_area`),
   ADD KEY `id_fk_cargo` (`id_fk_cargo`);
+
+--
+-- Indexes for table `omisiones`
+--
+ALTER TABLE `omisiones`
+  ADD PRIMARY KEY (`id_omision`),
+  ADD KEY `id_fk_empleado` (`id_fk_empleado`),
+  ADD KEY `id_fk_ciudad` (`id_fk_ciudad`);
 
 --
 -- Indexes for table `roles`
@@ -305,13 +369,25 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT for table `ciudades`
 --
 ALTER TABLE `ciudades`
-  MODIFY `id_ciudad` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ciudad` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `controles`
+--
+ALTER TABLE `controles`
+  MODIFY `id_control` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `empleados`
 --
 ALTER TABLE `empleados`
   MODIFY `id_empleado` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `omisiones`
+--
+ALTER TABLE `omisiones`
+  MODIFY `id_omision` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -330,11 +406,25 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Constraints for table `controles`
+--
+ALTER TABLE `controles`
+  ADD CONSTRAINT `controles_ibfk_1` FOREIGN KEY (`id_fk_empleado`) REFERENCES `empleados` (`id_empleado`),
+  ADD CONSTRAINT `controles_ibfk_2` FOREIGN KEY (`id_fk_ciudad`) REFERENCES `ciudades` (`id_ciudad`);
+
+--
 -- Constraints for table `empleados`
 --
 ALTER TABLE `empleados`
   ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`id_fk_area`) REFERENCES `areas` (`id_area`),
   ADD CONSTRAINT `empleados_ibfk_2` FOREIGN KEY (`id_fk_cargo`) REFERENCES `cargos` (`id_cargo`);
+
+--
+-- Constraints for table `omisiones`
+--
+ALTER TABLE `omisiones`
+  ADD CONSTRAINT `omisiones_ibfk_1` FOREIGN KEY (`id_fk_empleado`) REFERENCES `empleados` (`id_empleado`),
+  ADD CONSTRAINT `omisiones_ibfk_2` FOREIGN KEY (`id_fk_ciudad`) REFERENCES `ciudades` (`id_ciudad`);
 
 --
 -- Constraints for table `usuarios`

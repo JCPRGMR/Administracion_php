@@ -66,7 +66,7 @@
             <label for="" class="w-t bg-black-blue" style="white-space: nowrap;">
                 Tiempo
             </label>
-            <input type="number" name="tiempo" id="tiempo" class="campo" required>
+            <input type="number" name="tiempo" id="tiempo" class="campo" required max="59" maxlength="2">
             <select name="medida" id="" class="campo w-t bg-black-blue">
                 <option value="minuto(s)">Minutos</option>
                 <option value="hora(s)">Horas</option>
@@ -75,15 +75,15 @@
     </div>
     <div class="container-camps">
         <div class="radio">
-            <input type="checkbox" name="Ingreso" class="b_chek" id="Ingreso">
+            <input type="checkbox" name="Ingreso" class="b_chek" id="Ingreso" value="1">
             <label for="Ingreso" class="check">Ingreso</label>
         </div>
         <div class="radio">
-            <input type="checkbox" name="Salida" class="b_chek" id="Salida">
+            <input type="checkbox" name="Salida" class="b_chek" id="Salida" value="1">
             <label for="Salida" class="check">Salida</label>
         </div>
         <div class="radio">
-            <input type="checkbox" name="Marcacion" class="b_chek" id="Marcacion">
+            <input type="checkbox" name="Marcacion" class="b_chek" id="Marcacion" value="1">
             <label for="Marcacion" class="check">Marcacion</label>
         </div>
     </div>
@@ -91,7 +91,7 @@
         <textarea name="justificacion" id="justificacion" cols="30" rows="10" placeholder="Justificacion" class="input-w-t campo" required></textarea>
     </div>
     <div class="container-camps">
-        <button type="submit" class="btn bg-black-blue">Regsitrar</button>
+        <button type="submit" class="btn bg-black-blue" name="nueva_omision">Regsitrar</button>
     </div>
 </form>
 <script>

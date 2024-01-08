@@ -47,4 +47,4 @@
         </div>
     </form>
 </header>
-<iframe src="Empleados_pdf.php" frameborder="0" id="ven" class="ven" name="ven"></iframe>
+<!-- <iframe src="Omisiones_pdf.php" frameborder="0" id="ven" class="ven" name="ven"></iframe> -->

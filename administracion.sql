@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 08, 2024 at 01:35 PM
+-- Generation Time: Jan 08, 2024 at 09:41 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -101,14 +101,22 @@ CREATE TABLE `controles` (
   `id_control` int NOT NULL,
   `ingreso` time NOT NULL,
   `registro_ingreso` datetime NOT NULL,
-  `salida` time NOT NULL,
-  `registro_salida` datetime NOT NULL,
+  `salida` time DEFAULT NULL,
+  `registro_salida` datetime DEFAULT NULL,
   `id_fk_empleado` bigint NOT NULL,
   `id_fk_ciudad` int NOT NULL,
   `f_registro_control` date NOT NULL,
   `h_registro_control` time NOT NULL,
-  `alter_control` datetime NOT NULL
+  `alter_control` datetime NOT NULL,
+  `observaciones` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `controles`
+--
+
+INSERT INTO `controles` (`id_control`, `ingreso`, `registro_ingreso`, `salida`, `registro_salida`, `id_fk_empleado`, `id_fk_ciudad`, `f_registro_control`, `h_registro_control`, `alter_control`, `observaciones`) VALUES
+(1, '00:00:01', '2024-01-08 17:15:30', NULL, NULL, 15, 1, '2024-01-08', '17:15:30', '2024-01-08 17:15:30', 'Sin observaciones');
 
 -- --------------------------------------------------------
 
@@ -176,6 +184,15 @@ CREATE TABLE `omisiones` (
   `alter_omision` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `omisiones`
+--
+
+INSERT INTO `omisiones` (`id_omision`, `justificacion`, `tiempo_omision`, `medida`, `ingreso`, `salida`, `marcacion`, `id_fk_empleado`, `id_fk_ciudad`, `f_registro_omision`, `h_registro_omision`, `alter_omision`) VALUES
+(3, 'asd', 59, 'minuto(s)', 1, 0, 1, 15, 1, '2024-01-08', '14:56:32', '2024-01-08 14:56:32'),
+(6, 'asd', 59, 'minuto(s)', 0, 0, 0, 1, 1, '2024-01-08', '15:06:48', '2024-01-08 15:06:48'),
+(7, 'asd', 59, 'minuto(s)', 0, 0, 0, 1, 1, '2024-01-08', '16:47:47', '2024-01-08 16:47:47');
+
 -- --------------------------------------------------------
 
 --
@@ -224,6 +241,44 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `contrasena`, `id_fk_rol`, `id_
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vista_controles`
+-- (See below for the actual view)
+--
+CREATE TABLE `vista_controles` (
+`id_control` int
+,`ingreso` time
+,`registro_ingreso` datetime
+,`salida` time
+,`registro_salida` datetime
+,`id_fk_empleado` bigint
+,`id_fk_ciudad` int
+,`f_registro_control` date
+,`h_registro_control` time
+,`alter_control` datetime
+,`observaciones` text
+,`id_empleado` bigint
+,`nombres` varchar(100)
+,`apellidos` varchar(100)
+,`ci` bigint
+,`expedido` varchar(100)
+,`celular` bigint
+,`id_fk_area` bigint
+,`id_fk_cargo` bigint
+,`f_registro_empleado` date
+,`h_registro_empleado` time
+,`alter_empleado` datetime
+,`des_area` varchar(100)
+,`des_cargo` varchar(100)
+,`id_ciudad` int
+,`des_ciudad` varchar(100)
+,`f_registro_ciudad` date
+,`h_registro_ciudad` time
+,`alter_ciudad` datetime
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vista_empleados`
 -- (See below for the actual view)
 --
@@ -241,6 +296,45 @@ CREATE TABLE `vista_empleados` (
 ,`alter_empleado` datetime
 ,`des_area` varchar(100)
 ,`des_cargo` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vista_omisiones`
+-- (See below for the actual view)
+--
+CREATE TABLE `vista_omisiones` (
+`id_omision` int
+,`justificacion` text
+,`tiempo_omision` int
+,`medida` varchar(250)
+,`ingreso` int
+,`salida` int
+,`marcacion` int
+,`id_fk_empleado` bigint
+,`id_fk_ciudad` int
+,`f_registro_omision` date
+,`h_registro_omision` time
+,`alter_omision` datetime
+,`id_empleado` bigint
+,`nombres` varchar(100)
+,`apellidos` varchar(100)
+,`ci` bigint
+,`expedido` varchar(100)
+,`celular` bigint
+,`id_fk_area` bigint
+,`id_fk_cargo` bigint
+,`f_registro_empleado` date
+,`h_registro_empleado` time
+,`alter_empleado` datetime
+,`des_area` varchar(100)
+,`des_cargo` varchar(100)
+,`id_ciudad` int
+,`des_ciudad` varchar(100)
+,`f_registro_ciudad` date
+,`h_registro_ciudad` time
+,`alter_ciudad` datetime
 );
 
 -- --------------------------------------------------------
@@ -274,11 +368,29 @@ CREATE TABLE `vista_usuarios` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vista_controles`
+--
+DROP TABLE IF EXISTS `vista_controles`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_controles`  AS SELECT `controles`.`id_control` AS `id_control`, `controles`.`ingreso` AS `ingreso`, `controles`.`registro_ingreso` AS `registro_ingreso`, `controles`.`salida` AS `salida`, `controles`.`registro_salida` AS `registro_salida`, `controles`.`id_fk_empleado` AS `id_fk_empleado`, `controles`.`id_fk_ciudad` AS `id_fk_ciudad`, `controles`.`f_registro_control` AS `f_registro_control`, `controles`.`h_registro_control` AS `h_registro_control`, `controles`.`alter_control` AS `alter_control`, `controles`.`observaciones` AS `observaciones`, `vista_empleados`.`id_empleado` AS `id_empleado`, `vista_empleados`.`nombres` AS `nombres`, `vista_empleados`.`apellidos` AS `apellidos`, `vista_empleados`.`ci` AS `ci`, `vista_empleados`.`expedido` AS `expedido`, `vista_empleados`.`celular` AS `celular`, `vista_empleados`.`id_fk_area` AS `id_fk_area`, `vista_empleados`.`id_fk_cargo` AS `id_fk_cargo`, `vista_empleados`.`f_registro_empleado` AS `f_registro_empleado`, `vista_empleados`.`h_registro_empleado` AS `h_registro_empleado`, `vista_empleados`.`alter_empleado` AS `alter_empleado`, `vista_empleados`.`des_area` AS `des_area`, `vista_empleados`.`des_cargo` AS `des_cargo`, `ciudades`.`id_ciudad` AS `id_ciudad`, `ciudades`.`des_ciudad` AS `des_ciudad`, `ciudades`.`f_registro_ciudad` AS `f_registro_ciudad`, `ciudades`.`h_registro_ciudad` AS `h_registro_ciudad`, `ciudades`.`alter_ciudad` AS `alter_ciudad` FROM ((`controles` join `vista_empleados` on((`vista_empleados`.`id_empleado` = `controles`.`id_fk_empleado`))) join `ciudades` on((`ciudades`.`id_ciudad` = `controles`.`id_fk_ciudad`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vista_empleados`
 --
 DROP TABLE IF EXISTS `vista_empleados`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_empleados`  AS SELECT `empleados`.`id_empleado` AS `id_empleado`, `empleados`.`nombres` AS `nombres`, `empleados`.`apellidos` AS `apellidos`, `empleados`.`ci` AS `ci`, `empleados`.`expedido` AS `expedido`, `empleados`.`celular` AS `celular`, `empleados`.`id_fk_area` AS `id_fk_area`, `empleados`.`id_fk_cargo` AS `id_fk_cargo`, `empleados`.`f_registro_empleado` AS `f_registro_empleado`, `empleados`.`h_registro_empleado` AS `h_registro_empleado`, `empleados`.`alter_empleado` AS `alter_empleado`, `areas`.`des_area` AS `des_area`, `cargos`.`des_cargo` AS `des_cargo` FROM ((`empleados` left join `areas` on((`areas`.`id_area` = `empleados`.`id_fk_area`))) left join `cargos` on((`cargos`.`id_cargo` = `empleados`.`id_fk_cargo`))) ORDER BY `empleados`.`f_registro_empleado` DESC, `empleados`.`h_registro_empleado` DESC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vista_omisiones`
+--
+DROP TABLE IF EXISTS `vista_omisiones`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_omisiones`  AS SELECT `omisiones`.`id_omision` AS `id_omision`, `omisiones`.`justificacion` AS `justificacion`, `omisiones`.`tiempo_omision` AS `tiempo_omision`, `omisiones`.`medida` AS `medida`, `omisiones`.`ingreso` AS `ingreso`, `omisiones`.`salida` AS `salida`, `omisiones`.`marcacion` AS `marcacion`, `omisiones`.`id_fk_empleado` AS `id_fk_empleado`, `omisiones`.`id_fk_ciudad` AS `id_fk_ciudad`, `omisiones`.`f_registro_omision` AS `f_registro_omision`, `omisiones`.`h_registro_omision` AS `h_registro_omision`, `omisiones`.`alter_omision` AS `alter_omision`, `vista_empleados`.`id_empleado` AS `id_empleado`, `vista_empleados`.`nombres` AS `nombres`, `vista_empleados`.`apellidos` AS `apellidos`, `vista_empleados`.`ci` AS `ci`, `vista_empleados`.`expedido` AS `expedido`, `vista_empleados`.`celular` AS `celular`, `vista_empleados`.`id_fk_area` AS `id_fk_area`, `vista_empleados`.`id_fk_cargo` AS `id_fk_cargo`, `vista_empleados`.`f_registro_empleado` AS `f_registro_empleado`, `vista_empleados`.`h_registro_empleado` AS `h_registro_empleado`, `vista_empleados`.`alter_empleado` AS `alter_empleado`, `vista_empleados`.`des_area` AS `des_area`, `vista_empleados`.`des_cargo` AS `des_cargo`, `ciudades`.`id_ciudad` AS `id_ciudad`, `ciudades`.`des_ciudad` AS `des_ciudad`, `ciudades`.`f_registro_ciudad` AS `f_registro_ciudad`, `ciudades`.`h_registro_ciudad` AS `h_registro_ciudad`, `ciudades`.`alter_ciudad` AS `alter_ciudad` FROM ((`omisiones` join `vista_empleados` on((`vista_empleados`.`id_empleado` = `omisiones`.`id_fk_empleado`))) join `ciudades` on((`ciudades`.`id_ciudad` = `omisiones`.`id_fk_ciudad`))) ;
 
 -- --------------------------------------------------------
 
@@ -375,7 +487,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT for table `controles`
 --
 ALTER TABLE `controles`
-  MODIFY `id_control` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_control` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `empleados`
@@ -387,7 +499,7 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT for table `omisiones`
 --
 ALTER TABLE `omisiones`
-  MODIFY `id_omision` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_omision` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `roles`

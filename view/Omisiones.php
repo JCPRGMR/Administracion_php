@@ -1,4 +1,5 @@
 <?php include("../templates/header.php")?>
+<?php include("../response/Omisiones.php")?>
 
 <link rel="stylesheet" href="../css/styles2.css">
 <style>
@@ -26,8 +27,26 @@
         background-color: white;
         color: black;
     }
+    table{
+        border-collapse: collapse;
+    }
     th{
         padding: 10px;
+    }
+    td{
+        text-align: center;
+    }
+    button{
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .btn-editar{
+        background-color: greenyellow;
+    }
+    .btn-eliminar{
+        background-color: red;
+        color: white;
     }
     .pdf{
         position: absolute;
@@ -63,19 +82,40 @@
         </div>
     </form>
 </div>
-<table id="myTable">
+<table id="myTable" border="1">
     <thead>
         <th>CIUDAD</th>
         <th>NOMBRES</th>
         <th>AREAS</th>
-        <th>TIEMPO DE ATRASO</th>
+        <th>OMISION</th>
         <th>INGRESO</th>
         <th>SALIDA</th>
         <th>MARCACION</th>
         <th>JUSTIFICACION</th>
         <th>REGISTRO</th>
+        <th>ACCIONES</th>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        <?php foreach(Omisiones::Mostrar() as $item):?>
+        <tr>
+            <td><?= $item->des_ciudad ?></td>
+            <td><?= $item->nombres ?></td>
+            <td><?= $item->des_area ?></td>
+            <td><?= $item->tiempo_omision . ' ' . $item->medida ?></td>
+            <td><?= $item->ingreso ?></td>
+            <td><?= $item->salida ?></td>
+            <td><?= $item->marcacion ?></td>
+            <td><?= $item->justificacion ?></td>
+            <td><?= $item->f_registro_omision ?></td>
+            <td>
+                <form action="../request/Omisiones.php" method="post">
+                    <button type="submit" class="btn-editar" name="editar" value="<?= $item->id_omision ?>">Editar</button>
+                    <button type="submit" class="btn-eliminar" name="eliminar" value="<?= $item->id_omision ?>">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
 </table>
 <script>
     function filterTable() {

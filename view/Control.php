@@ -1,4 +1,5 @@
 <?php include("../templates/header.php")?>
+<?php include("../class/Controles.php")?>
 <link rel="stylesheet" href="../css/styles2.css">
 <style>
     main{
@@ -20,6 +21,9 @@
     }
     .date-filter{
         cursor: pointer;
+    }
+    td{
+        text-align: center;
     }
     a:nth-child(2) .item-list{
         background-color: white;
@@ -55,7 +59,19 @@
         <th>OBSERVACIONES</th>
         <th>REGISTRO</th>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        <?php foreach(Controles::Mostrar() as $item):?>
+        <tr>
+            <td><?= $item->des_ciudad ?></td>
+            <td><?= $item->nombres ?></td>
+            <td><?= $item->des_area ?></td>
+            <td><?= $item->ingreso ?></td>
+            <td><?= $item->salida ?></td>
+            <td><?= $item->observaciones ?></td>
+            <td><?= $item->f_registro_control ?></td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
 </table>
 <script>
     function filterTable() {

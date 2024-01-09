@@ -93,7 +93,7 @@
         <th>MARCACION</th>
         <th>JUSTIFICACION</th>
         <th>REGISTRO</th>
-        <th>ACCIONES</th>
+        <!-- <th>ACCIONES</th> -->
     </thead>
     <tbody>
         <?php foreach(Omisiones::Mostrar() as $item):?>
@@ -102,17 +102,17 @@
             <td><?= $item->nombres ?></td>
             <td><?= $item->des_area ?></td>
             <td><?= $item->tiempo_omision . ' ' . $item->medida ?></td>
-            <td><?= $item->ingreso ?></td>
-            <td><?= $item->salida ?></td>
-            <td><?= $item->marcacion ?></td>
+            <td><?= ($item->ingreso)? '✔️' : '❌' ; ?></td>
+            <td><?= ($item->salida)? '✔️' : '❌' ; ?></td>
+            <td><?= ($item->marcacion)? '✔️' : '❌' ; ?></td>
             <td><?= $item->justificacion ?></td>
             <td><?= $item->f_registro_omision ?></td>
-            <td>
+            <!-- <td>
                 <form action="../request/Omisiones.php" method="post">
                     <button type="submit" class="btn-editar" name="editar" value="<?= $item->id_omision ?>">Editar</button>
                     <button type="submit" class="btn-eliminar" name="eliminar" value="<?= $item->id_omision ?>">Eliminar</button>
                 </form>
-            </td>
+            </td> -->
         </tr>
         <?php endforeach;?>
     </tbody>

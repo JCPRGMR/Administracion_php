@@ -16,13 +16,12 @@
 
                     observaciones 
                 ) VALUES(
-                    ?,NOW(), ?,?, NOW(),NOW(),NOW(), ?
+                    NOW(),NOW(), ?,?, NOW(),NOW(),NOW(), ?
                 )";
                 $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $post->control, PDO::PARAM_STR);
-                $stmt->bindParam(2, $post->id_empleado, PDO::PARAM_INT);
-                $stmt->bindParam(3, $post->id_ciudad, PDO::PARAM_INT);
-                $stmt->bindParam(4, $post->Observaciones, PDO::PARAM_STR);
+                $stmt->bindParam(1, $post->id_empleado, PDO::PARAM_INT);
+                $stmt->bindParam(2, $post->id_ciudad, PDO::PARAM_INT);
+                $stmt->bindParam(3, $post->Observaciones, PDO::PARAM_STR);
                 $stmt->execute();
                 header("Location: ../view/Controles.php");
             } catch (PDOException $th) {
@@ -31,7 +30,7 @@
         }
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM vista_controles";
+                $sql = "SELECT * FROM vista_controles ORDER BY f_registro_control DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);

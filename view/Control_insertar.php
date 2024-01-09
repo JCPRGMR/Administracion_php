@@ -64,12 +64,6 @@
         </div>
     </div>
     <div class="container-camps">
-        <div class="input-w-btn bg-black-blue">
-            <label for="" class="w-t" style="white-space: nowrap;">Hora de ingreso</label>
-            <input type="time" name="control" class="campo" id="" value="">
-        </div>
-    </div>
-    <div class="container-camps">
         <textarea name="Observaciones" id="Observaciones" cols="30" rows="10" placeholder="Observaciones..." class="input-w-t campo" required></textarea>
     </div>
     <div class="container-camps">
@@ -112,11 +106,20 @@
             localStorage.setItem(checkboxId + 'Value', JSON.stringify(checkboxValue));
         });
     }
-    oldCheckBox('Ingreso');
-    oldCheckBox('Salida');
-    oldCheckBox('Marcacion');
+    function oldRadio(radioId) {
+        const radio = document.getElementById(radioId);
+        const storedValue = localStorage.getItem(radioId + 'Value');
 
-    oldinput('justificacion')
+        if (storedValue) {
+            radio.checked = JSON.parse(storedValue);
+        }
+
+        radio.addEventListener('change', function () {
+            const radioValue = radio.checked;
+            localStorage.setItem(radioId + 'Value', JSON.stringify(radioValue));
+        });
+    }
+    oldinput('Observaciones')
     oldinput('tiempo')
 
     oldselect('empleados');

@@ -23,5 +23,17 @@
                 echo $th;
             }
         }
+        public static function Buscar_id(int $id){
+            try {
+                $sql = "SELECT * FROM ciudades WHERE id_ciudad = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
+                return $result;
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
     }
 ?>

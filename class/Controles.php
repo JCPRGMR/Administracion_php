@@ -14,7 +14,7 @@
                     h_registro_control,
                     alter_control,
 
-                    observaciones 
+                    obs_ingreso 
                 ) VALUES(
                     NOW(),NOW(), ?,?, NOW(),NOW(),NOW(), ?
                 )";
@@ -23,7 +23,7 @@
                 $stmt->bindParam(2, $post->id_ciudad, PDO::PARAM_INT);
                 $stmt->bindParam(3, $post->Observaciones, PDO::PARAM_STR);
                 $stmt->execute();
-                header("Location: ../view/Controles.php");
+                header("Location: ../view/Control.php");
             } catch (PDOException $th) {
                 echo $th;
             }
@@ -36,7 +36,7 @@
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
                 return $resultado;
             } catch (PDOException $th) {
-                echo $th;
+                return $th;
             }
         }
         public static function Modificar(object $post){
@@ -56,6 +56,93 @@
                 $stmt->execute();
             } catch (PDOException $th) {
                 echo $th;
+            }
+        }
+        public static function Insertar_Salida(object $post){
+            try {
+                $sql = "UPDATE controles SET salida = ?, registro_salida = NOW(), obs_salida = ?, alter_control = NOW() WHERE id_control = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $post->salida, PDO::PARAM_STR);
+                $stmt->bindParam(2, $post->Observaciones, PDO::PARAM_STR);
+                $stmt->bindParam(3, $post->id_salida, PDO::PARAM_INT);
+                $stmt->execute();
+                header("Location: ../view/Control.php");
+            } catch (PDOException $th) {
+                echo $th->getMessage();
+            }
+        }
+        public static function pdf(object $post){
+            try {
+                $sql = "SELECT * FROM vista_controles WHERE ";
+                $params = array();
+                $conditionAdded = false;
+        
+                $conditions = array();
+
+                if (!empty($post->carnet)) {
+                    $conditions[] = "ci LIKE ?";
+                    $params[] = "%" . $post->carnet . "%";
+                }
+
+                if (!empty($post->nombres)) {
+                    $conditions[] = "nombres LIKE ?";
+                    $params[] = "%" . $post->nombres . "%";
+                }
+
+                if (!empty($post->apellidos)) {
+                    $conditions[] = "apellidos LIKE ?";
+                    $params[] = "%" . $post->apellidos . "%";
+                }
+
+                if (!empty($post->area)) {
+                    $conditions[] = "id_fk_area = ?";
+                    $params[] = $post->area;
+                }
+
+                if (!empty($post->ciudad)) {
+                    $conditions[] = "id_fk_ciudad = ?";
+                    $params[] = $post->ciudad;
+                }
+
+                if (!empty($post->inicio) && !empty($post->fin)) {
+                    $conditions[] = "f_registro_control >= ? AND f_registro_control <= ?";
+                    $params[] = $post->inicio;
+                    $params[] = $post->fin;
+                }
+
+                $sql = "SELECT * FROM vista_controles";
+                if (!empty($conditions)) {
+                    $sql .= " WHERE " . implode(" AND ", $conditions);
+                }
+
+                $stmt = Conexion::Conectar()->prepare($sql);
+
+                if (!empty($params)) {
+                    // Bind parameters
+                    for ($i = 0; $i < count($params); $i++) {
+                        $stmt->bindParam($i + 1, $params[$i]);
+                    }
+                }
+
+        
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                return self::Mostrar();
+            }
+        }
+        public static function Detalles_De_Busqueda(object $post){
+            if(!empty((array) $post)) {
+                foreach($post as $key => $value) {
+                    if(strlen($value) <= 0) {
+                        $value = "Sin datos";
+                    }
+                    echo '<br>';
+                    echo $key . ': <strong>' . $value . '</strong><br>';
+                }
+            } else {
+                echo 'Sin datos de búsqueda';
             }
         }
     }

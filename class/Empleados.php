@@ -3,6 +3,9 @@
     class Empleados extends Conexion{
         public static function Insertar(object $datos){
             try {
+                if(!is_null(self::Buscar_carnet($datos))){
+                    header("Location: ../view/Empleados.php");
+                }
                 $expedido = strtoupper($datos->expedido);
                 $sql = "INSERT INTO empleados (
                     nombres, 
@@ -57,6 +60,18 @@
                 return $resultado;
             } catch (PDOException $th) {
                 echo $th;
+            }
+        }
+        public static function Buscar_carnet(object $post){
+            try {
+                $sql = "SELECT * FROM empleados WHERE ci = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $post->carnet, PDO::PARAM_STR);
+                $stmt->execute();
+                $res = $stmt->fetch(PDO::FETCH_OBJ);
+                return $res;
+            } catch (PDOException $th) {
+                return null;
             }
         }
     }

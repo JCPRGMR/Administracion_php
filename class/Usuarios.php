@@ -6,7 +6,7 @@
         }
         public static function Modificar(object $datos){}
         public static function Mostrar(){}
-        public static function Elimianr(object $datos){}
+        public static function Eliminar(object $datos){}
         public static function Verificar(object $datos){
             try {
                 if(strlen($datos->username) > 0 && strlen($datos->password) > 0){

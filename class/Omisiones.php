@@ -2,8 +2,6 @@
     require_once("../connection/Conexion.php");
     class Omisiones extends Conexion{
         public static function Insertar(object $post){
-            // echo '<pre>';
-            // var_dump($post);
             $Ingreso = (isset($post->Ingreso))? 1 : 0;
             $Salida = (isset($post->Salida))? 1 : 0;
             $Marcacion = (isset($post->Marcacion))? 1 : 0;
@@ -52,13 +50,6 @@
                 echo $th;
             }
         }
-        public static function Filtro_pdf(object $post){
-            try{
-                $sql = "SELECT * vista_omisiones WHERE nombres = '%?%' ";
-            }catch(PDOException $th){
-                echo $th->getMessage();
-            }
-        }
         public static function Eliminar(object $post){
             try {
                 $sql = "DELETE FROM omisiones WHERE id_omision = ?";
@@ -68,6 +59,97 @@
                 header("Location: ../view/Omisiones.php");
             } catch (PDOException $th) {
                 echo $th;
+            }
+        }
+        public static function pdf(object $post){
+            try {
+                $sql = "SELECT * FROM vista_omisiones WHERE ";
+                $params = array();
+                $conditionAdded = false;
+        
+                $conditions = array();
+
+                if (!empty($post->carnet)) {
+                    $conditions[] = "ci LIKE ?";
+                    $params[] = "%" . $post->carnet . "%";
+                }
+
+                if (!empty($post->nombres)) {
+                    $conditions[] = "nombres LIKE ?";
+                    $params[] = "%" . $post->nombres . "%";
+                }
+
+                if (!empty($post->apellidos)) {
+                    $conditions[] = "apellidos LIKE ?";
+                    $params[] = "%" . $post->apellidos . "%";
+                }
+
+                if (!empty($post->area)) {
+                    $conditions[] = "id_fk_area = ?";
+                    $params[] = $post->area;
+                }
+
+                if (!empty($post->Ingreso)) {
+                    $conditions[] = "ingreso = ?";
+                    $params[] = $post->Ingreso;
+                }
+                if (!empty($post->Salida)) {
+                    $conditions[] = "Salida = ?";
+                    $params[] = $post->Salida;
+                }
+                if (!empty($post->Marcacion)) {
+                    $conditions[] = "Marcacion = ?";
+                    $params[] = $post->Marcacion;
+                }
+                if (!empty($post->tiempo)) {
+                    $conditions[] = "tiempo_omision = ?";
+                    $params[] = $post->tiempo;
+                }
+                if (!empty($post->medida)) {
+                    $conditions[] = "medida = ?";
+                    $params[] = $post->medida;
+                }
+
+                if (!empty($post->inicio) && !empty($post->fin)) {
+                    $conditions[] = "f_registro_omision >= ? AND f_registro_omision <= ?";
+                    $params[] = $post->inicio;
+                    $params[] = $post->fin;
+                }
+
+                $sql = "SELECT * FROM vista_omisiones";
+                if (!empty($conditions)) {
+                    $sql .= " WHERE " . implode(" AND ", $conditions);
+                }
+
+                $stmt = Conexion::Conectar()->prepare($sql);
+
+                if (!empty($params)) {
+                    // Bind parameters
+                    for ($i = 0; $i < count($params); $i++) {
+                        $stmt->bindParam($i + 1, $params[$i]);
+                    }
+                }
+
+        
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                return self::Mostrar();
+            }
+        }
+        
+        public static function Detalles_De_Busqueda(object $post){
+            if(!empty((array) $post)) {
+                foreach($post as $key => $value) {
+                    if(strlen($value) <= 0) {
+                        $value = "Sin datos";
+                    }
+                    echo '<br>';
+                    echo $key . ': <strong>' . $value . '</strong><br>';
+                }
+            } else {
+                echo 'Sin datos de búsqueda';
             }
         }
     }

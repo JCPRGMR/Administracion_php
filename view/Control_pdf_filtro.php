@@ -2,7 +2,7 @@
 <?php include("../response/Omisiones.php")?>
 <link rel="stylesheet" href="../css/styles2.css">
 <style>
-    a:nth-child(1) .item-list{
+    a:nth-child(2) .item-list{
         background-color: white;
         color: black;
     }
@@ -42,9 +42,9 @@
         color: white;
     }
 </style>
-<form action="Omisiones_pdf.php" method="post" class="form" target="_blank">
+<form action="Control_pdf.php" method="post" class="form" target="_blank">
     <header class="p20 uper-bold">
-        Filtrar datos para el pdf de omision
+        Filtrar datos para el pdf de control
     </header>
     <div class="contenedor p20">
         <div class="select-w-btn">
@@ -66,46 +66,30 @@
             <label for="" class="w-t bg-black-blue">Por Areas</label>
             <select name="area" id="areas" class="campo">
                 <option value="" hidden>Seleccionar Area...</option>
-                <option value="">Todas las areas...</option>
+                <option value="">Buscar en todo...</option>
                 <?php foreach(Areas::Mostrar() as $item): ?>
                     <option value="<?= $item->id_area ?>"><?= $item->des_area ?></option>
                 <?php endforeach ?>
             </select>
         </div>
         <br>
-        <div class="div">
-            <div class="radio">
-                <input type="checkbox" name="Ingreso" class="b_chek" id="Ingreso" value="1">
-                <label for="Ingreso" class="check">Ingreso</label>
-            </div>
-            <div class="radio">
-                <input type="checkbox" name="Salida" class="b_chek" id="Salida" value="1">
-                <label for="Salida" class="check">Salida</label>
-            </div>
-            <div class="radio">
-                <input type="checkbox" name="Marcacion" class="b_chek" id="Marcacion" value="1">
-                <label for="Marcacion" class="check">Marcacion</label>
-            </div>
-        </div>
-        <br>
-        <div name="" id="" class="select-w-btn">
-            <label for="" class="w-t bg-black-blue" style="white-space: nowrap;">
-                Tiempo
-            </label>
-            <input type="number" name="tiempo" id="tiempo" class="campo" max="59" maxlength="2" placeholder="00">
-            <select name="medida" id="" class="campo w-t bg-black-blue">
-                <option value="">Minutos y horas</option>
-                <option value="minuto(s)">Minutos</option>
-                <option value="hora(s)">Horas</option>
+        <div class="select-w-btn">
+            <label for="" class="w-t bg-black-blue">Por Ciudad</label>
+            <select name="ciudad" id="areas" class="campo">
+                <option value="" hidden>Seleccionar Ciudad...</option>
+                <option value="">Buscar en todo...</option>
+                <?php foreach(Ciudades::Mostrar() as $item): ?>
+                    <option value="<?= $item->id_ciudad ?>"><?= $item->des_ciudad ?></option>
+                <?php endforeach ?>
             </select>
         </div>
         <br>
         <div class="select-w-btn">
             <label for="" class="w-t bg-black-blue">Por Fecha de registro</label>
             <label for="" class="w-t bg-black-blue">Desde</label>
-            <input type="date" name="inicio" id="inicio" class="campo" placeholder="Nombres">
+            <input type="date" name="inicio" id="inicio" class="campo">
             <label for="" class="w-t bg-black-blue">Hasta</label>
-            <input type="date" name="fin" id="fin" class="campo" placeholder="Nombres">
+            <input type="date" name="fin" id="fin" class="campo">
         </div>
         <br>
         <button type="submit" class="btn">
@@ -155,8 +139,6 @@
     // oldinput('tiempo');
     // oldinput('inicio');
     // oldinput('fin');
-
-    // oldselect('areas');
 
     // oldCheckBox('Ingreso');
     // oldCheckBox('Salida');

@@ -35,6 +35,16 @@
     }
     td{
         text-align: center;
+        white-space: nowrap;
+        overflow: auto;
+        max-width: 100px;
+    }
+    td::-webkit-scrollbar-thumb{
+        background-color: purple;
+        border-radius: 10px;
+    }
+    td::-webkit-scrollbar{
+        height: 5px;
     }
     button{
         border: none;

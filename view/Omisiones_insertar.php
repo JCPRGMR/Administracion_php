@@ -43,7 +43,7 @@
             <select name="empleado" id="empleados" class="campo" required>
                 <?php foreach(Empleados::Mostrar() as $item): ?>
                     <option value="<?= $item->id_empleado ?>">
-                        <?= $item->nombres . ' | ' . $item->des_area ?>
+                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
                     </option>
                 <?php endforeach ?>
             </select>
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div class="container-camps">
-        <textarea name="justificacion" id="justificacion" cols="30" rows="10" placeholder="Justificacion" class="input-w-t campo" required></textarea>
+        <textarea name="justificacion" id="justificacion" cols="30" rows="10" placeholder="Justificacion" class="input-w-t campo"></textarea>
     </div>
     <div class="container-camps">
         <button type="submit" class="btn bg-black-blue" name="nueva_omision">Regsitrar</button>

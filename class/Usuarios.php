@@ -5,7 +5,17 @@
 
         }
         public static function Modificar(object $datos){}
-        public static function Mostrar(){}
+        public static function Mostrar(){
+            try {
+                $sql = "SELECT * FROM vista_usuarios";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
         public static function Eliminar(object $datos){}
         public static function Verificar(object $datos){
             try {
@@ -22,14 +32,23 @@
                         $hola = 'Hola';
                         header("Location: ../view/Control.php");
                     }else{
-                        echo 'El usuarios que ustede ingreso no existe comuniquese con sistemas';
+                        $msg =  'El usuario no existe';
+                        header('Location: ../' . urlencode($msg));
                     }
                 }else{
-                    echo 'Envio datos vacios';
+                    $msg =  'llene los campos';
+                    header('Location: ../?msg=' . urlencode($msg));
                 }
             } catch (PDOException $th) {
                 echo $th->getMessage();
             }
+        }
+
+
+        public static function Cerrar_sesion(){
+            session_start();
+            $_SESSION = array();
+            session_destroy();
         }
     }
 ?>

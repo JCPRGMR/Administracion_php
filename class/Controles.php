@@ -26,6 +26,7 @@
                 header("Location: ../view/Control.php");
             } catch (PDOException $th) {
                 echo $th;
+                header("Location: ../view/Control.php");
             }
         }
         public static function Mostrar(){
@@ -60,11 +61,33 @@
         }
         public static function Insertar_Salida(object $post){
             try {
-                $sql = "UPDATE controles SET salida = ?, registro_salida = NOW(), obs_salida = ?, alter_control = NOW() WHERE id_control = ?";
+                $sql = "UPDATE controles SET salida = NOW(), registro_salida = NOW(), alter_control = NOW() WHERE id_control = ?";
                 $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $post->salida, PDO::PARAM_STR);
-                $stmt->bindParam(2, $post->Observaciones, PDO::PARAM_STR);
-                $stmt->bindParam(3, $post->id_salida, PDO::PARAM_INT);
+                $stmt->bindParam(1, $post->id_salida, PDO::PARAM_INT);
+                $stmt->execute();
+                header("Location: ../view/Control.php");
+            } catch (PDOException $th) {
+                echo $th->getMessage();
+            }
+        }
+        public static function obs_ingreso(object $post){
+            try {
+                $sql = "UPDATE controles SET obs_ingreso = ?, alter_control = NOW() WHERE id_control = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $post->observacion, PDO::PARAM_STR);
+                $stmt->bindParam(2, $post->obs_ingreso, PDO::PARAM_INT);
+                $stmt->execute();
+                header("Location: ../view/Control.php");
+            } catch (PDOException $th) {
+                echo $th->getMessage();
+            }
+        }
+        public static function obs_salida(object $post){
+            try {
+                $sql = "UPDATE controles SET obs_salida = ?, alter_control = NOW() WHERE id_control = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $post->observacion, PDO::PARAM_STR);
+                $stmt->bindParam(2, $post->obs_salida, PDO::PARAM_INT);
                 $stmt->execute();
                 header("Location: ../view/Control.php");
             } catch (PDOException $th) {

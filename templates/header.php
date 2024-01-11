@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php session_start();?>
+<?php (!isset($_SESSION['usuario'])) && header('Location: ../'); ?>
+
 <?php date_default_timezone_set('America/Caracas'); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +9,7 @@
     <link rel="stylesheet" href="../css/main2.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../img/rtp_icono.png" type="image/x-icon">
     <title>Administracion</title>
 </head>
 <body>
@@ -60,9 +63,16 @@
                     <li class="item-list">Control de personal</li>
                 </a>
                 <a href="../view/Empleados.php">
-                    <li class="item-list">Empleados registrados</li>
+                    <li class="item-list">Registro de personal</li>
                 </a>
-                <a href="">
+                <?php if($_SESSION['usuario']->des_rol == 'Administrador'): ?>
+                    <a href="../view/Usuarios.php" >
+                        <li class="item-list">
+                            Registro de usuarios
+                        </li>
+                    </a>
+                <?php endif; ?>
+                <a href="../request/cerrar_sesion.php">
                     <li class="item-list">Cerrar sesion</li>
                 </a>
             </ul>

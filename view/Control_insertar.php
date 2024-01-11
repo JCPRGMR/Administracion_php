@@ -43,7 +43,7 @@
             <select name="id_empleado" id="empleados" class="campo" required>
                 <?php foreach(Empleados::Mostrar() as $item): ?>
                     <option value="<?= $item->id_empleado ?>">
-                        <?= $item->nombres . ' | ' . $item->des_area ?>
+                        <?= $item->nombres . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
                     </option>
                 <?php endforeach ?>
             </select>

@@ -14,7 +14,7 @@
 <main>
     <form action="../request/Empleados.php" method="post" class="form">
         <header class="p20 uper-bold">
-            Formulario para el registro de empleados
+            Formulario para el registro de personal
         </header>
         <div class="container-camps">
             <div class="input-w-t">

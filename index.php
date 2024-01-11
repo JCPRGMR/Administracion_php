@@ -1,3 +1,4 @@
+<?= $msg = isset($_GET['msg']) ? urldecode($_GET['msg']) : '';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

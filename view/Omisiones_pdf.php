@@ -1,7 +1,6 @@
 <?php
-    // var_dump($_POST);
-    // echo $_POST['busqueda'];
     session_start();
+    (!isset($_SESSION['usuario'])) && header('Location: ../');
     $post = (object) $_POST;
     ob_start();
 ?>

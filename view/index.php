@@ -1,0 +1,1 @@
+<?php (!isset($_SESSION['usuario'])) && header('Location: ../'); ?>

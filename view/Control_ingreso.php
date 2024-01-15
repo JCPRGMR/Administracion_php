@@ -36,13 +36,14 @@
 </style>
 <form action="../request/Controles.php" method="post" class="form">
     <header class="p20 uper-bold">
-        Detalles
+        Detalles de ingreso
     </header>
     <div class="container-camps">
         <textarea name="obs_ingreso" id="Observaciones" cols="30" rows="10" placeholder="Observaciones..." class="input-w-t campo" required></textarea>
     </div>
     <div class="container-camps">
-        <button type="submit" class="btn bg-black-blue" name="id_ingreso_obs" value="<?= $_GET['id']?>">Registrar<?= $_GET['id']?></button>
+        <button type="submit" class="btn bg-black-blue" name="id_ingreso_obs" value="<?= $_GET['id']?>">Registrar</button>
+        <button type="submit" class="btn bg-black-blue" name="sin_obs_ingreso" value="<?= $_GET['id']?>">Sin Observaciones</button>
     </div>
 </form>
 <script>

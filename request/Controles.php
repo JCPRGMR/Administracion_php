@@ -7,8 +7,8 @@
     (isset($post->id_ingreso)) && Controles::Agregar_Ingreso($post);
     (isset($post->id_salida)) && Controles::Agregar_Salida($post);
 
-    (isset($post->id_obs_ingreso)) && header("Location: ../view/Control_ingreso.php?id=". $post->id_obs_ingreso);
-    (isset($post->id_obs_salida)) && header("Location: ../view/Control_salida.php?id=". $post->id_obs_salida);
+    // (isset($post->id_obs_ingreso)) && header("Location: ../view/Control_ingreso.php?id=". $post->id_obs_ingreso);
+    // (isset($post->id_obs_salida)) && header("Location: ../view/Control_salida.php?id=". $post->id_obs_salida);
     
     (isset($post->id_ingreso_obs)) && Controles::obs_ingreso($post);
     (isset($post->id_salida_obs)) && Controles::obs_salida($post);

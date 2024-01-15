@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/index2.css" type="text/css">
     <link rel="shortcut icon" href="imgs/rtp_icono.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comercial</title>
+    <title>Administracion</title>
 </head>
 <body>
     <div class="container">

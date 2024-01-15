@@ -49,7 +49,7 @@
             </select>
             <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
-        <div class="select-w-btn">
+        <div class="select-w-btn" style="visibility: hidden; position: absolute;">
             <label for="" class="w-t bg-black-blue">
                 Ciudad
             </label>

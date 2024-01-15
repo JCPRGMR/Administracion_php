@@ -2,7 +2,7 @@
 <?php include("../response/Empleados.php") ?>
 <link rel="stylesheet" href="../css/styles2.css">
 <style>
-    a:nth-child(3) .item-list{
+    a:nth-child(<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? 2 : ($_GET['back'] == 'omision' ? 1 : 3)) : 3; ?>) .item-list{
         background-color: white;
         color: black;
     }
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div class="container-cmaps p10">
-            <button type="submit" name="insertar_usuario" class="btn bg-black-blue">Registrar</button>
+            <button type="submit" name="insertar_usuario" class="btn bg-black-blue" value="<?= isset($_GET['back'])? $_GET['back']: ''; ?>">Registrar</button>
             <a href="Empleados.php" class="btn bg-black-blue">Volver atras</a>
         </div>
     </form>

@@ -20,7 +20,11 @@
                 $stmt->bindParam(1, $post->id_empleado, PDO::PARAM_INT);
                 $stmt->bindParam(2, $post->id_ciudad, PDO::PARAM_INT);
                 $stmt->execute();
-                header("Location: ../view/Control.php");
+                $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $post = $stmt->fetchObject();
+                header("Location: ../view/Control_ingreso.php?id=". $post->id_control);
             } catch (PDOException $th) {
                 echo $th;
                 // header("Location: ../view/Control.php");
@@ -45,7 +49,11 @@
                 $stmt->bindParam(1, $post->id_empleado, PDO::PARAM_INT);
                 $stmt->bindParam(2, $post->id_ciudad, PDO::PARAM_INT);
                 $stmt->execute();
-                header("Location: ../view/Control.php");
+                $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $post = $stmt->fetchObject();
+                header("Location: ../view/Control_salida.php?id=". $post->id_control);
             } catch (PDOException $th) {
                 echo $th;
                 // header("Location: ../view/Control.php");
@@ -57,7 +65,7 @@
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->bindParam(1, $post->id_ingreso, PDO::PARAM_INT);
                 $stmt->execute();
-                header("Location: ../view/Control.php");
+                header("Location: ../view/Control_ingreso.php?id=". $post->id_ingreso);
             } catch (PDOException $th) {
                 echo $th->getMessage();
             }
@@ -68,7 +76,7 @@
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->bindParam(1, $post->id_salida, PDO::PARAM_INT);
                 $stmt->execute();
-                header("Location: ../view/Control.php");
+                header("Location: ../view/Control_salida.php?id=". $post->id_salida);
             } catch (PDOException $th) {
                 echo $th->getMessage();
             }

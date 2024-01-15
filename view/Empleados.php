@@ -85,7 +85,7 @@
 <div class="head">
     <!-- <a href="" id="open-modal" onclick="localStorage.clear()">Agregar empleados</a> -->
     <div class="container-camps p10">
-        <a href="Empleados_insertar.php" class="btn bg-black-blue">
+        <a href="Empleados_insertar.php" class="btn bg-black-blue" onclick="localStorage.clear()">
             Agregar Personal
         </a>
     </div>

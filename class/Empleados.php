@@ -1,4 +1,7 @@
 <?php
+
+use FontLib\Table\Type\post;
+
     require_once("../connection/Conexion.php");
     class Empleados extends Conexion{
         public static function Insertar(object $datos){
@@ -32,7 +35,16 @@
                     $stmt->bindParam(6, $datos->area, PDO::PARAM_STR);
                     $stmt->bindParam(7, $datos->cargo, PDO::PARAM_STR);
                     $stmt->execute();
-                    header("Location: ../view/Empleados.php");
+                    $defaultPage = 'Empleados.php';
+
+                    $redirectPage = isset($datos->insertar_usuario) ? (
+                        $datos->insertar_usuario == 'control' ? 'Control.php' : (
+                            $datos->insertar_usuario == 'omision' ? 'Omisiones_insertar.php' : $defaultPage
+                        )
+                    ) : $defaultPage;
+
+                    header("Location: ../view/" . $redirectPage);
+                    exit();
                 }
             } catch (PDOException $th) {
                 echo $th->getMessage();

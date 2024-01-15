@@ -87,14 +87,11 @@
     </svg>
 </a>
 <div class="header">
-    <a href="Omisiones_insertar.php" class="btn bg-black-blue">
+    <a href="Omisiones_insertar.php" class="btn bg-black-blue" onclick="localStorage.clear()">
         Nuevo registro
     </a>
     <form action="" method="post">
         <div class="filtros">
-            <label for="date-f" class="date-filter">
-                🔍
-            </label>
             <input type="search" autofocus class="campo" name="buscador" id="buscador" placeholder="Buscador" onkeyup="filterTable()">
         </div>
     </form>

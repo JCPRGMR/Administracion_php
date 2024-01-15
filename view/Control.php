@@ -88,7 +88,7 @@
 </a>
 <form action="../request/Controles.php" method="post">
     <div class="container-camps">
-        <div class="select-w-btn">
+        <div class="select-w-btn" style="visibility: hidden; position: absolute;">
             <select name="id_ciudad" id="ciudad" class="campo" required>
                 <?php foreach (Ciudades::Mostrar() as $item) : ?>
                     <option value="<?= $item->id_ciudad ?>">
@@ -107,14 +107,17 @@
                     </option>
                 <?php endforeach ?>
             </select>
-            <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
+            <a href="Empleados_insertar.php?back=control" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
-        <button type="submit" name="insertar_ingreso" value="<?= $item->id_control ?>">
+        <button type="submit" name="insertar_ingreso" value="<?= $item->id_control ?>" onclick="localStorage.clear()">
             Registrar Ingreso
         </button>
-        <button type="submit" name="insertar_salida" value="<?= $item->id_control ?>">
+        <button type="submit" name="insertar_salida" value="<?= $item->id_control ?>" onclick="localStorage.clear()">
             Registrar Salida
         </button>
+        <div class="input-w-t">
+            <input type="search" autofocus class="campo" name="buscador" id="buscador" placeholder="Buscador... 🔍" onkeyup="filterTable()">
+        </div>
     </div>
 </form>
 <div class="tabla">
@@ -133,7 +136,7 @@
             <?php foreach (Controles::Mostrar() as $item) : ?>
                 <tr>
                     <td><?= $item->des_ciudad ?></td>
-                    <td><?= $item->nombres ?></td>
+                    <td><?= $item->nombres . ' ' . $item->apellidos ?></td>
                     <td><?= $item->des_area ?></td>
                     <td>
                         <?php if (is_null($item->ingreso)) : ?>
@@ -146,22 +149,7 @@
                             <?= $item->ingreso ?>
                         <?php endif; ?>
                     </td>
-                    <td>
-                        <?php if (is_null($item->ingreso)) : ?>
-                            <?= "" ?>
-                        <?php elseif (!is_null($item->obs_ingreso) && strlen($item->obs_ingreso) > 0) : ?>
-                            <?= $item->obs_ingreso ?>
-                        <?php else : ?>
-                            <form action="../request/Controles.php" method="post">
-                                <button type="submit" name="id_obs_ingreso" value="<?= $item->id_control ?>" class="bg-black-blue">
-                                    Agregar observacion
-                                </button>
-                                <button type="submit" class="bg-black-blue" name="sin_obs_ingreso" value="<?= $item->id_control ?>">
-                                    No
-                                </button>
-                            </form>
-                        <?php endif; ?>
-                    </td>
+                    <td><?= $item->obs_ingreso ?></td>
                     <td>
                         <?php if (is_null($item->salida)) : ?>
                             <form action="../request/Controles.php" method="post">
@@ -173,22 +161,7 @@
                             <?= $item->salida ?>
                         <?php endif; ?>
                     </td>
-                    <td>
-                        <?php if (is_null($item->salida)) : ?>
-                            <?= "" ?>
-                        <?php elseif (!is_null($item->obs_salida) && strlen($item->obs_salida) > 0) : ?>
-                            <?= $item->obs_salida ?>
-                        <?php else : ?>
-                            <form action="../request/Controles.php" method="post">
-                                <button type="submit" name="id_obs_salida" value="<?= $item->id_control ?>" class="bg-black-blue">
-                                    Agregar observación
-                                </button>
-                                <button type="submit" class="bg-black-blue" name="sin_obs_salida" value="<?= $item->id_control ?>">
-                                    No
-                                </button>
-                            </form>
-                        <?php endif; ?>
-                    </td>
+                    <td><?= $item->obs_salida ?></td>
                     <td><?= $item->f_registro_control ?></td>
                 </tr>
             <?php endforeach; ?>

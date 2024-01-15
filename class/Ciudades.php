@@ -3,7 +3,7 @@
     class Ciudades extends Conexion{
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM ciudades";
+                $sql = "SELECT * FROM ciudades ORDER BY id_ciudad DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_OBJ);

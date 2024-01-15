@@ -8,6 +8,7 @@
     }
     main{
         flex-direction: column;
+        overflow: scroll;
     }
     th{
         padding: 10px;

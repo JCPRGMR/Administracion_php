@@ -5,6 +5,7 @@
 <style>
     main{
         flex-direction: column;
+        overflow: scroll;
     }
     .header{
         background-color: rgb(43, 43, 43);
@@ -109,9 +110,9 @@
             <td><?= $item->nombres ?></td>
             <td><?= $item->des_area ?></td>
             <td><?= $item->tiempo_omision . ' ' . $item->medida ?></td>
-            <td><?= ($item->ingreso)? '✔️' : '❌' ; ?></td>
-            <td><?= ($item->salida)? '✔️' : '❌' ; ?></td>
-            <td><?= ($item->marcacion)? '✔️' : '❌' ; ?></td>
+            <td><?= ($item->ingreso)? '✔️' : '' ; ?></td>
+            <td><?= ($item->salida)? '✔️' : '' ; ?></td>
+            <td><?= ($item->marcacion)? '✔️' : '' ; ?></td>
             <td><?= $item->justificacion ?></td>
             <td><?= $item->f_registro_omision ?></td>
             <!-- <td>

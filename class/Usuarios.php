@@ -2,7 +2,6 @@
     require_once("../connection/Conexion.php");
     class Usuarios extends Conexion{
         public static function Insertar(object $datos){
-
         }
         public static function Modificar(object $datos){}
         public static function Mostrar(){

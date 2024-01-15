@@ -46,9 +46,7 @@
     }
 </style>
 <h1>
-    <img src="http://<?php echo $_SERVER['HTTP_HOST'] ?>/administracion_php/img/rtp_icono.png" alt="" width="50" height="50">
     REPORTE DE OMISIONES
-    <img src="http://<?php echo $_SERVER['HTTP_HOST'] ?>/administracion_php/img/rtp_icono.png" alt="" width="50" height="50">
 </h1>
 <br>
 Ciudad: La Paz

@@ -1,5 +1,5 @@
 <?php include("../templates/header.php")?>
-<?php include("../response/Omisiones.php")?>
+<?php include("../response/Usuarios.php")?>
 <link rel="stylesheet" href="../css/styles2.css">
 <style>
     a:nth-child(4) .item-list{
@@ -68,7 +68,7 @@
                 Rol
             </label>
             <select name="ciudad" id="ciudad" class="campo" required>
-                <?php foreach(Ciudades::Mostrar() as $item): ?>
+                <?php foreach(Roles::Mostrar() as $item): ?>
                 <option value="<?= $item->id_ciudad ?>">
                     <?= $item->des_ciudad ?>
                 </option>

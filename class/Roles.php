@@ -11,5 +11,16 @@
                 echo $th->getMessage();
             }
         }
+        public static function Mostrar(){
+            try {
+                $sql = "SELECT * FROM roles";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
     }
 ?>

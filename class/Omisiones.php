@@ -1,5 +1,6 @@
 <?php
     require_once("../connection/Conexion.php");
+    date_default_timezone_set('America/Caracas');
     class Omisiones extends Conexion{
         public static function Insertar(object $post){
             $Ingreso = (isset($post->Ingreso))? 1 : 0;

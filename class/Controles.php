@@ -1,5 +1,6 @@
 <?php
     require_once("../connection/Conexion.php");
+    date_default_timezone_set('America/Caracas');
     class Controles extends Conexion{
         public static function Insertar_Ingreso(object $post){
             try {
@@ -14,11 +15,24 @@
                     h_registro_control,
                     alter_control
                 ) VALUES(
-                    NOW(),NOW(), ?,?, NOW(),NOW(),NOW()
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?
                 )";
                 $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $post->id_empleado, PDO::PARAM_INT);
-                $stmt->bindParam(2, $post->id_ciudad, PDO::PARAM_INT);
+                $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
+
+                $stmt->bindParam(3, $post->id_empleado, PDO::PARAM_INT);
+                $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
+                
+                $stmt->bindParam(5, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('H:i:s'), PDO::PARAM_STR);
                 $stmt->execute();
                 $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
                 $stmt = Conexion::Conectar()->prepare($sql);
@@ -43,11 +57,24 @@
                     h_registro_control,
                     alter_control
                 ) VALUES(
-                    NOW(),NOW(), ?,?, NOW(),NOW(),NOW()
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?
                 )";
                 $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $post->id_empleado, PDO::PARAM_INT);
-                $stmt->bindParam(2, $post->id_ciudad, PDO::PARAM_INT);
+                $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
+
+                $stmt->bindParam(3, $post->id_empleado, PDO::PARAM_INT);
+                $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
+                
+                $stmt->bindParam(5, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('H:i:s'), PDO::PARAM_STR);
                 $stmt->execute();
                 $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
                 $stmt = Conexion::Conectar()->prepare($sql);
@@ -61,9 +88,13 @@
         }
         public static function Agregar_Ingreso(object $post){
             try {
-                $sql = "UPDATE controles SET ingreso = NOW(), registro_ingreso = NOW(), alter_control = NOW() WHERE id_control = ?";
+                $sql = "UPDATE controles SET ingreso = ?, registro_ingreso = ?, alter_control = ? WHERE id_control = ?";
                 $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $post->id_ingreso, PDO::PARAM_INT);
+                $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(3, date('H:i:s'), PDO::PARAM_STR);
+
+                $stmt->bindParam(4, $post->id_ingreso, PDO::PARAM_INT);
                 $stmt->execute();
                 header("Location: ../view/Control_ingreso.php?id=". $post->id_ingreso);
             } catch (PDOException $th) {
@@ -72,9 +103,13 @@
         }
         public static function Agregar_Salida(object $post){
             try {
-                $sql = "UPDATE controles SET salida = NOW(), registro_salida = NOW(), alter_control = NOW() WHERE id_control = ?";
+                $sql = "UPDATE controles SET salida = ?, registro_salida = ?, alter_control = ? WHERE id_control = ?";
                 $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $post->id_salida, PDO::PARAM_INT);
+                $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(3, date('H:i:s'), PDO::PARAM_STR);
+
+                $stmt->bindParam(4, $post->id_ingreso, PDO::PARAM_INT);
                 $stmt->execute();
                 header("Location: ../view/Control_salida.php?id=". $post->id_salida);
             } catch (PDOException $th) {

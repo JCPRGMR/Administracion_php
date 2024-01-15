@@ -19,6 +19,7 @@ header{
     overflow: hidden;
     text-overflow: ellipsis;
     justify-content: space-between;
+    z-index: 1001;
 }
 .izq{
     display: flex;

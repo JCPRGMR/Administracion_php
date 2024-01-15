@@ -122,7 +122,6 @@
                 $stmt->bindParam(1, $post->obs_salida, PDO::PARAM_STR);
                 $stmt->bindParam(2, $post->id_salida_obs, PDO::PARAM_INT);
                 $stmt->execute();
-                echo 'Que pedo';
                 header("Location: ../view/Control.php");
             } catch (PDOException $th) {
                 echo $th->getMessage();

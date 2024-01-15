@@ -5,7 +5,15 @@
 <style>
     main {
         flex-direction: column;
+        overflow: auto;
+    }
+    table {
+        width: 100%;
         overflow: scroll;
+        border-collapse: collapse;
+    }
+    .tabla{
+        overflow: auto;
     }
     .header {
         background-color: rgb(43, 43, 43);
@@ -30,8 +38,12 @@
     td {
         text-align: center;
         white-space: nowrap;
+        text-overflow: ellipsis;
         overflow: auto;
-        max-width: 100px;
+        max-width: 120px;
+    }
+    td > button{
+        cursor: pointer;
     }
 
     td::-webkit-scrollbar-thumb {
@@ -49,13 +61,12 @@
     }
 
     th {
+        position: sticky;
         padding: 10px;
+        top: 0px;
+        background-color: white;
     }
 
-    table {
-        width: 100%;
-        overflow: scroll;
-    }
 
     .pdf {
         position: absolute;
@@ -106,82 +117,84 @@
         </button>
     </div>
 </form>
-<table id="myTable" border="1">
-    <thead>
-        <th>CIUDAD</th>
-        <th>NOMBRES</th>
-        <th>AREAS</th>
-        <th>INGRESO</th>
-        <th>OBS. INGRESO</th>
-        <th>SALIDA</th>
-        <th>OBS. SALIDA</th>
-        <th>REGISTRO</th>
-    </thead>
-    <tbody>
-        <?php foreach (Controles::Mostrar() as $item) : ?>
-            <tr>
-                <td><?= $item->des_ciudad ?></td>
-                <td><?= $item->nombres ?></td>
-                <td><?= $item->des_area ?></td>
-                <td>
-                    <?php if (is_null($item->ingreso)) : ?>
-                        <form action="../request/Controles.php" method="post">
-                            <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
-                                Agregar ingreso
-                            </button>
-                        </form>
-                    <?php else : ?>
-                        <?= $item->ingreso ?>
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <?php if (is_null($item->ingreso)) : ?>
-                        <?= "" ?>
-                    <?php elseif (!is_null($item->obs_ingreso) && strlen($item->obs_ingreso) > 0) : ?>
-                        <?= $item->obs_ingreso ?>
-                    <?php else : ?>
-                        <form action="../request/Controles.php" method="post">
-                            <button type="submit" name="id_obs_ingreso" value="<?= $item->id_control ?>" class="bg-black-blue">
-                                Agregar observacion
-                            </button>
-                            <button type="submit" class="bg-black-blue" name="sin_obs_ingreso" value="<?= $item->id_control ?>">
-                                No
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <?php if (is_null($item->salida)) : ?>
-                        <form action="../request/Controles.php" method="post">
-                            <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
-                                Agregar salida
-                            </button>
-                        </form>
-                    <?php else : ?>
-                        <?= $item->salida ?>
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <?php if (is_null($item->salida)) : ?>
-                        <?= "" ?>
-                    <?php elseif (!is_null($item->obs_salida) && strlen($item->obs_salida) > 0) : ?>
-                        <?= $item->obs_salida ?>
-                    <?php else : ?>
-                        <form action="../request/Controles.php" method="post">
-                            <button type="submit" name="id_obs_salida" value="<?= $item->id_control ?>" class="bg-black-blue">
-                                Agregar observación
-                            </button>
-                            <button type="submit" class="bg-black-blue" name="sin_obs_salida" value="<?= $item->id_control ?>">
-                                No
-                            </button>
-                        </form>
-                    <?php endif; ?>
-                </td>
-                <td><?= $item->f_registro_control ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="tabla">
+    <table id="myTable" border="1">
+        <thead>
+            <th>CIUDAD</th>
+            <th>NOMBRES</th>
+            <th>AREAS</th>
+            <th>INGRESO</th>
+            <th>OBS. INGRESO</th>
+            <th>SALIDA</th>
+            <th>OBS. SALIDA</th>
+            <th>REGISTRO</th>
+        </thead>
+        <tbody>
+            <?php foreach (Controles::Mostrar() as $item) : ?>
+                <tr>
+                    <td><?= $item->des_ciudad ?></td>
+                    <td><?= $item->nombres ?></td>
+                    <td><?= $item->des_area ?></td>
+                    <td>
+                        <?php if (is_null($item->ingreso)) : ?>
+                            <form action="../request/Controles.php" method="post">
+                                <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
+                                    Agregar ingreso
+                                </button>
+                            </form>
+                        <?php else : ?>
+                            <?= $item->ingreso ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if (is_null($item->ingreso)) : ?>
+                            <?= "" ?>
+                        <?php elseif (!is_null($item->obs_ingreso) && strlen($item->obs_ingreso) > 0) : ?>
+                            <?= $item->obs_ingreso ?>
+                        <?php else : ?>
+                            <form action="../request/Controles.php" method="post">
+                                <button type="submit" name="id_obs_ingreso" value="<?= $item->id_control ?>" class="bg-black-blue">
+                                    Agregar observacion
+                                </button>
+                                <button type="submit" class="bg-black-blue" name="sin_obs_ingreso" value="<?= $item->id_control ?>">
+                                    No
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if (is_null($item->salida)) : ?>
+                            <form action="../request/Controles.php" method="post">
+                                <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
+                                    Agregar salida
+                                </button>
+                            </form>
+                        <?php else : ?>
+                            <?= $item->salida ?>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if (is_null($item->salida)) : ?>
+                            <?= "" ?>
+                        <?php elseif (!is_null($item->obs_salida) && strlen($item->obs_salida) > 0) : ?>
+                            <?= $item->obs_salida ?>
+                        <?php else : ?>
+                            <form action="../request/Controles.php" method="post">
+                                <button type="submit" name="id_obs_salida" value="<?= $item->id_control ?>" class="bg-black-blue">
+                                    Agregar observación
+                                </button>
+                                <button type="submit" class="bg-black-blue" name="sin_obs_salida" value="<?= $item->id_control ?>">
+                                    No
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                    </td>
+                    <td><?= $item->f_registro_control ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 <script>
     function filterTable() {
         var input, filter, tbody, tr, td, i, txtValue;

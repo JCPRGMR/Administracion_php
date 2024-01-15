@@ -36,17 +36,14 @@
         Registro de omision
     </header>
     <div class="container-camps">
-        <div class="select-w-btn">
-            <label for="" class="w-t bg-black-blue">
-                Empleado
-            </label>
-            <select name="empleado" id="empleados" class="campo" required>
-                <?php foreach(Empleados::Mostrar() as $item): ?>
-                    <option value="<?= $item->id_empleado ?>">
-                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
+        <div class="input-w-btn">
+            <input type="search" list="lista" autofocus class="campo" name="id_empleado" id="id_empleado" placeholder="Buscador... 🔍" onkeyup="filterTable()">
+            <datalist id="lista">
+                <?php foreach (Empleados::Mostrar() as $item) : ?>
+                    <option value="<?= $item->id_empleado . ': ' .  $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>">
                     </option>
                 <?php endforeach ?>
-            </select>
+            </datalist>
             <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
         <div class="select-w-btn" style="visibility: hidden; position: absolute;">

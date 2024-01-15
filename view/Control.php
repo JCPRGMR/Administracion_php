@@ -98,15 +98,14 @@
             </select>
             <a href="Ciudades.php" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
-        <div class="select-w-btn">
-            <select name="id_empleado" id="" class="campo" required>
-                <!-- <option value="" hidden>Seleccionar empleado...</option> -->
+        <div class="input-w-btn">
+            <input type="search" list="lista" autofocus class="campo" name="id_empleado" id="id_empleado" placeholder="Buscador... 🔍" onkeyup="filterTable()">
+            <datalist id="lista">
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
-                    <option value="<?= $item->id_empleado ?>">
-                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo ?>
+                    <option value="<?= $item->id_empleado . ': ' .  $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>">
                     </option>
                 <?php endforeach ?>
-            </select>
+            </datalist>
             <a href="Empleados_insertar.php?back=control" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
         <button type="submit" name="insertar_ingreso" value="<?= $item->id_control ?>" onclick="localStorage.clear()">
@@ -115,9 +114,7 @@
         <button type="submit" name="insertar_salida" value="<?= $item->id_control ?>" onclick="localStorage.clear()">
             Registrar Salida
         </button>
-        <div class="input-w-t">
-            <input type="search" autofocus class="campo" name="buscador" id="buscador" placeholder="Buscador... 🔍" onkeyup="filterTable()">
-        </div>
+        
     </div>
 </form>
 <div class="tabla">
@@ -171,7 +168,7 @@
 <script>
     function filterTable() {
         var input, filter, tbody, tr, td, i, txtValue;
-        input = document.getElementById("buscador");
+        input = document.getElementById("id_empleado");
         filter = input.value.toUpperCase();
         tbody = document.querySelector("#myTable tbody");
         tr = tbody.getElementsByTagName("tr");

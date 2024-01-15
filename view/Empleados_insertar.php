@@ -72,7 +72,7 @@
         </div>
         <div class="container-cmaps p10">
             <button type="submit" name="insertar_usuario" class="btn bg-black-blue" value="<?= isset($_GET['back'])? $_GET['back']: ''; ?>">Registrar</button>
-            <a href="Empleados.php" class="btn bg-black-blue">Volver atras</a>
+            <a href="<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? 'Control.php' : ($_GET['back'] == 'omision' ? 'Omisiones.php' : 'Empleados.php')) : 'Empleados.php'; ?>" class="btn bg-black-blue">Volver atras</a>
         </div>
     </form>
 </main>

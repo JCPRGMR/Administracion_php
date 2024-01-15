@@ -43,7 +43,6 @@
     </div>
     <div class="container-camps">
         <button type="submit" class="btn bg-black-blue" name="id_ingreso_obs" value="<?= $_GET['id']?>">Registrar</button>
-        <button type="submit" class="btn bg-black-blue" name="sin_obs_ingreso" value="<?= $_GET['id']?>">Sin Observaciones</button>
     </div>
 </form>
 <script>

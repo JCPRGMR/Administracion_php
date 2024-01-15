@@ -25,14 +25,14 @@
                 )";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
 
                 $stmt->bindParam(3, $post->id_empleado, PDO::PARAM_INT);
                 $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
                 
-                $stmt->bindParam(5, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
                 $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(7, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
                 $stmt->execute();
                 $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
                 $stmt = Conexion::Conectar()->prepare($sql);
@@ -67,14 +67,14 @@
                 )";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
 
                 $stmt->bindParam(3, $post->id_empleado, PDO::PARAM_INT);
                 $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
                 
-                $stmt->bindParam(5, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
                 $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(7, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
                 $stmt->execute();
                 $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
                 $stmt = Conexion::Conectar()->prepare($sql);
@@ -91,8 +91,8 @@
                 $sql = "UPDATE controles SET ingreso = ?, registro_ingreso = ?, alter_control = ? WHERE id_control = ?";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(3, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
+                $stmt->bindParam(3, date('Y-m-d H:i:s'), PDO::PARAM_STR);
 
                 $stmt->bindParam(4, $post->id_ingreso, PDO::PARAM_INT);
                 $stmt->execute();
@@ -106,10 +106,10 @@
                 $sql = "UPDATE controles SET salida = ?, registro_salida = ?, alter_control = ? WHERE id_control = ?";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(2, date('H:i:s'), PDO::PARAM_STR);
-                $stmt->bindParam(3, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
+                $stmt->bindParam(3, date('Y-m-d H:i:s'), PDO::PARAM_STR);
 
-                $stmt->bindParam(4, $post->id_ingreso, PDO::PARAM_INT);
+                $stmt->bindParam(4, $post->id_salida, PDO::PARAM_INT);
                 $stmt->execute();
                 header("Location: ../view/Control_salida.php?id=". $post->id_salida);
             } catch (PDOException $th) {

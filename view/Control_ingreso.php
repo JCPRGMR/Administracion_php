@@ -39,7 +39,7 @@
         Detalles de ingreso
     </header>
     <div class="container-camps">
-        <textarea name="obs_ingreso" id="Observaciones" cols="30" rows="10" placeholder="Observaciones..." class="input-w-t campo" required></textarea>
+        <textarea name="obs_ingreso" id="Observaciones" cols="30" rows="10" placeholder="Observaciones..." class="input-w-t campo"></textarea>
     </div>
     <div class="container-camps">
         <button type="submit" class="btn bg-black-blue" name="id_ingreso_obs" value="<?= $_GET['id']?>">Registrar</button>

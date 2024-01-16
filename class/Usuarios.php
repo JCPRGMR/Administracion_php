@@ -32,11 +32,11 @@
                         header("Location: ../view/Control.php");
                     }else{
                         $msg =  'El usuario no existe';
-                        header('Location: ../' . urlencode($msg));
+                        header('Location: ../index.php' . urlencode($msg));
                     }
                 }else{
                     $msg =  'llene los campos';
-                    header('Location: ../?msg=' . urlencode($msg));
+                    header('Location: ../index.php?msg=' . urlencode($msg));
                 }
             } catch (PDOException $th) {
                 echo $th->getMessage();

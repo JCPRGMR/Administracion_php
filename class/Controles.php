@@ -4,47 +4,47 @@
     class Controles extends Conexion{
         public static function Insertar_Ingreso(object $post){
             $id_emp = trim(explode( ':', $post->id_empleado)[0]);
-            echo (self::Validar_control($post->id_empleado))? 'si' :'no';
-            // try {
-            //     $sql = "INSERT INTO controles(
-            //         ingreso,
-            //         registro_ingreso,
+            // echo (self::Validar_control($post->id_empleado))? 'si' :'no';
+            try {
+                $sql = "INSERT INTO controles(
+                    ingreso,
+                    registro_ingreso,
 
-            //         id_fk_empleado,
-            //         id_fk_ciudad,
+                    id_fk_empleado,
+                    id_fk_ciudad,
 
-            //         f_registro_control,
-            //         h_registro_control,
-            //         alter_control
-            //     ) VALUES(
-            //         ?,
-            //         ?,
-            //         ?,
-            //         ?,
-            //         ?,
-            //         ?,
-            //         ?
-            //     )";
-            //     $stmt = Conexion::Conectar()->prepare($sql);
-            //     $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
-            //     $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
+                    f_registro_control,
+                    h_registro_control,
+                    alter_control
+                ) VALUES(
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?
+                )";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
 
-            //     $stmt->bindParam(3, $id_emp, PDO::PARAM_INT);
-            //     $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
+                $stmt->bindParam(3, $id_emp, PDO::PARAM_INT);
+                $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
                 
-            //     $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
-            //     $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
-            //     $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
-            //     $stmt->execute();
-            //     $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
-            //     $stmt = Conexion::Conectar()->prepare($sql);
-            //     $stmt->execute();
-            //     $post = $stmt->fetchObject();
-            //     header("Location: ../view/Control_ingreso.php?id=". $post->id_control);
-            // } catch (PDOException $th) {
-            //     echo $th;
-            //     header("Location: ../view/Control.php");
-            // }
+                $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
+                $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
+                $stmt->execute();
+                $sql = "SELECT id_control FROM controles ORDER BY id_control DESC LIMIT 1";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $post = $stmt->fetchObject();
+                header("Location: ../view/Control_ingreso.php?id=". $post->id_control);
+            } catch (PDOException $th) {
+                echo $th;
+                header("Location: ../view/Control.php");
+            }
         }
         public static function Insertar_Salida(object $post){
             $id_emp = trim(explode( ':', $post->id_empleado)[0]);

@@ -49,14 +49,14 @@
         page-break-before: always;
     }
     .obs{
-        text-align: justify;
+        text-align: center;
     }
 </style>
 <h1>
     INGRESOS Y SALIDAS
 </h1>
 <br>
-Ciudad: La Paz
+Ciudad: El Alto
 <br>
 <br>
 <table id="myTable" border="1">

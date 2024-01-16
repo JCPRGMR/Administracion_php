@@ -42,14 +42,14 @@
         text-align: center;
     }
     .obs{
-        text-align: justify;
+        text-align: center;
     }
 </style>
 <h1>
     REPORTE DE OMISIONES
 </h1>
 <br>
-Ciudad: La Paz
+Ciudad: El Alto
 <br>
 <br>
 <table id="myTable" border="1">

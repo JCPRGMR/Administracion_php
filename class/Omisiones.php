@@ -3,6 +3,7 @@
     date_default_timezone_set('America/Caracas');
     class Omisiones extends Conexion{
         public static function Insertar(object $post){
+            $id_emp = trim(explode( ':', $post->id_empleado)[0]);
             $Ingreso = (isset($post->Ingreso))? 1 : 0;
             $Salida = (isset($post->Salida))? 1 : 0;
             $Marcacion = (isset($post->Marcacion))? 1 : 0;
@@ -32,7 +33,7 @@
                 $stmt->bindParam(4, $Ingreso, PDO::PARAM_STR);
                 $stmt->bindParam(5, $Salida, PDO::PARAM_STR);
                 $stmt->bindParam(6, $Marcacion, PDO::PARAM_STR);
-                $stmt->bindParam(7, $post->empleado, PDO::PARAM_INT);
+                $stmt->bindParam(7, $id_emp, PDO::PARAM_INT);
                 $stmt->bindParam(8, $post->ciudad, PDO::PARAM_INT);
                 $stmt->execute();
                 header("Location: ../view/Omisiones.php");
@@ -42,7 +43,7 @@
         }
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM vista_omisiones";
+                $sql = "SELECT * FROM vista_omisiones ORDER BY f_registro_omision DESC, h_registro_omision DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -122,6 +123,7 @@
                     $sql .= " WHERE " . implode(" AND ", $conditions);
                 }
 
+                $sql .= " ORDER BY f_registro_omision DESC, h_registro_omision DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
 
                 if (!empty($params)) {

@@ -74,17 +74,6 @@
         </div>
         <br>
         <div class="select-w-btn">
-            <label for="" class="w-t bg-black-blue">Por Ciudad</label>
-            <select name="ciudad" id="areas" class="campo">
-                <option value="" hidden>Seleccionar Ciudad...</option>
-                <option value="">Buscar en todo...</option>
-                <?php foreach(Ciudades::Mostrar() as $item): ?>
-                    <option value="<?= $item->id_ciudad ?>"><?= $item->des_ciudad ?></option>
-                <?php endforeach ?>
-            </select>
-        </div>
-        <br>
-        <div class="select-w-btn">
             <label for="" class="w-t bg-black-blue">Por Fecha de registro</label>
             <label for="" class="w-t bg-black-blue">Desde</label>
             <input type="date" name="inicio" id="inicio" class="campo">

@@ -47,7 +47,16 @@ use FontLib\Table\Type\post;
                     exit();
                 }
             } catch (PDOException $th) {
-                echo $th->getMessage();
+                $th->getMessage();
+                $defaultPage = 'Empleados.php';
+
+                $redirectPage = isset($datos->insertar_usuario) ? (
+                    $datos->insertar_usuario == 'control' ? 'Control.php' : (
+                        $datos->insertar_usuario == 'omision' ? 'Omisiones_insertar.php' : $defaultPage
+                    )
+                ) : $defaultPage;
+
+                header("Location: ../view/" . $redirectPage);
             }
         }
         public static function Modificar(object $datos){

@@ -3,7 +3,6 @@
     date_default_timezone_set('America/Caracas');
     class Controles extends Conexion{
         public static function Insertar_Ingreso(object $post){
-            $id_emp = trim(explode( ':', $post->id_empleado)[0]);
             // echo (self::Validar_control($post->id_empleado))? 'si' :'no';
             try {
                 $sql = "INSERT INTO controles(
@@ -29,7 +28,7 @@
                 $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
                 $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
 
-                $stmt->bindParam(3, $id_emp, PDO::PARAM_INT);
+                $stmt->bindParam(3, $post->id_empleado, PDO::PARAM_INT);
                 $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
                 
                 $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
@@ -47,7 +46,6 @@
             }
         }
         public static function Insertar_Salida(object $post){
-            $id_emp = trim(explode( ':', $post->id_empleado)[0]);
             self::Validar_control($post->id_empleado);
             try {
                 $sql = "INSERT INTO controles(
@@ -73,7 +71,7 @@
                 $stmt->bindParam(1, date('H:i:s'), PDO::PARAM_STR);
                 $stmt->bindParam(2, date('Y-m-d'), PDO::PARAM_STR);
 
-                $stmt->bindParam(3, $id_emp, PDO::PARAM_INT);
+                $stmt->bindParam(3, $post->id_empleado, PDO::PARAM_INT);
                 $stmt->bindParam(4, $post->id_ciudad, PDO::PARAM_INT);
                 
                 $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);

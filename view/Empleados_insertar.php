@@ -14,7 +14,7 @@
 <main>
     <form action="../request/Empleados.php" method="post" class="form">
         <header class="p20 uper-bold">
-            Formulario para el registro de personal
+            Formulario para el registro de personal desde <?= (isset($_GET['back'])) ? $_GET['back'] : 'PERSONAL' ; ?>
         </header>
         <div class="container-camps">
             <div class="input-w-t">
@@ -58,7 +58,7 @@
                     <option value="<?= $item->id_area ?>"><?= $item->des_area ?></option>
                     <?php endforeach; ?>
                 </select>
-                <a href="Areas.php" class="w-btn bg-black-blue">Anadir</a>
+                <a href="Areas.php<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? '?ruta=control' : ($_GET['back'] == 'omision' ? '?ruta=omision' : '')) : ''; ?>" class="w-btn bg-black-blue">Anadir</a>
             </div>
             <div class="select-w-btn">
                 <label for="" class="w-t">Cargo</label>
@@ -67,12 +67,12 @@
                     <option value="<?= $item->id_cargo ?>"><?= $item->des_cargo ?></option>
                     <?php endforeach; ?>
                 </select>
-                <a href="Cargos.php" class="w-btn bg-black-blue">Anadir</a>
+                <a href="Cargos.php<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? '?ruta=control' : ($_GET['back'] == 'omision' ? '?ruta=omision' : '')) : ''; ?>" class="w-btn bg-black-blue">Anadir</a>
             </div>
         </div>
         <div class="container-cmaps p10">
             <button type="submit" name="insertar_usuario" class="btn bg-black-blue" value="<?= isset($_GET['back'])? $_GET['back']: ''; ?>">Registrar</button>
-            <a href="<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? 'Control.php' : ($_GET['back'] == 'omision' ? 'Omisiones.php' : 'Empleados.php')) : 'Empleados.php'; ?>" class="btn bg-black-blue">Volver atras</a>
+            <!-- <a href="<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? 'Control.php' : ($_GET['back'] == 'omision' ? 'Omisiones.php' : 'Empleados.php')) : 'Empleados.php'; ?>" class="btn bg-black-blue">Volver atras</a> -->
         </div>
     </form>
 </main>

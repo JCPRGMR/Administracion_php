@@ -70,7 +70,8 @@
                     header('Location: ../index.php?msg=' . urlencode($msg));
                 }
             } catch (PDOException $th) {
-                echo $th->getMessage();
+                $th->getMessage();
+                header("Location: ../view/Control.php");
             }
         }
 

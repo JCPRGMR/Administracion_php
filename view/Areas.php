@@ -11,10 +11,9 @@
     <div class="container-camps">
         <div class="select-w-btn">
             <label for="area" class="w-t">Area</label>
-            <input type="text" name="des_area" id="area" class="campo" autofocus required>
+            <input type="text" name="des_area" id="area" class="campo" autofocus>
         </div>
-        <button type="submit" class="btn bg-black-blue" name="insertar_area">Registrar area</button>
-        <a href="Empleados_insertar.php" class="btn bg-black-blue">Volver Atras</a>
+        <button type="submit" class="btn bg-black-blue" name="insertar_area" value="<?= $_GET['ruta'] ?>">Registrar area</button>
     </div>
 </form>
 <div class="p20">

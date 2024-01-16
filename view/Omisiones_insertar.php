@@ -30,22 +30,59 @@
         color: white;
         background-color: royalblue;
     }
+    .option > label {
+      display: flex;
+      cursor: pointer;
+      background-color: rgb(43, 43, 43);
+      width: 100%;
+      color: white;
+      padding: 5px;
+    }
+    .option > label:hover{
+        background-color: gray;
+    }
+    #id_empleado{
+        padding: 5px;
+        border: none;
+    }
+    #id_empleado:focus + div{
+        visibility: visible;
+    }
+    .option{
+        visibility: hidden;
+        flex-direction: column;
+        position: absolute;
+        right: 0px;
+        top: 30px;
+    }
+    .option:hover{
+        visibility: visible;
+    }
+    .itemxd{
+        accent-color: purple;
+    }
+    .select{
+        position: relative;
+        background-color: yellow;
+    }
 </style>
 <form action="../request/Omisiones.php" method="post" class="form">
     <header class="p20 uper-bold">
         Registro de omision
     </header>
     <div class="container-camps">
-        <div class="input-w-btn">
-            <input type="search" list="lista" autofocus class="campo" name="id_empleado" id="id_empleado" placeholder="Buscador... 🔍" onkeyup="filterTable()">
-            <datalist id="lista">
+        <div class="select" style="background-color: red; width: 100%;">
+            <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
+            <div class="option" >
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
-                    <option value="<?= $item->id_empleado . ': ' .  $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>">
-                    </option>
+                <label>
+                <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
+                <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
+                </label>
                 <?php endforeach ?>
-            </datalist>
-            <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
+            </div>
         </div>
+        <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         <div class="select-w-btn" style="visibility: hidden; position: absolute;">
             <label for="" class="w-t bg-black-blue">
                 Ciudad
@@ -59,6 +96,8 @@
             </select>
             <a href="Ciudades.php" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
+    </div>
+    <div class="container-camps">
         <div name="" id="" class="select-w-btn">
             <label for="" class="w-t bg-black-blue" style="white-space: nowrap;">
                 Tiempo
@@ -69,8 +108,6 @@
                 <option value="hora(s)">Horas</option>
             </select>
         </div>
-    </div>
-    <div class="container-camps">
         <div class="radio">
             <input type="checkbox" name="Ingreso" class="b_chek" id="Ingreso" value="1">
             <label for="Ingreso" class="check">Ingreso</label>
@@ -137,3 +174,30 @@
     oldselect('empleados');
     oldselect('ciudad');
 </script>
+<script>
+    const radios = document.querySelectorAll('input[name="id_empleado"]');
+    const busquedaInput = document.getElementById('id_empleado');
+
+    radios.forEach(radio => {
+    radio.addEventListener('change', (event) => {
+        const label = event.target.parentElement;
+        const labelText = label.textContent.trim();
+        busquedaInput.value = labelText;
+    });
+    });
+
+    busquedaInput.addEventListener('input', () => {
+    const searchTerm = busquedaInput.value.toLowerCase();
+
+    radios.forEach(radio => {
+        const label = radio.parentElement;
+        const optionText = label.textContent.toLowerCase();
+
+        if (optionText.includes(searchTerm)) {
+        label.style.display = 'block';
+        } else {
+        label.style.display = 'none';
+        }
+    });
+    });
+  </script>

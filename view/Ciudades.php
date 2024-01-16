@@ -13,9 +13,6 @@
         <div class="select-w-btn">
             <label for="ciudad" class="w-t">Ciudad</label>
             <input type="text" name="des_ciudad" id="ciudad" class="campo" autofocus required>
-        </div>
-        <button type="submit" class="btn bg-black-blue" name="insertar_ciudad">Registrar ciudad</button>
-        <a href="Empleados_insertar.php" class="btn bg-black-blue">Volver Atras</a>
     </div>
 </form>
 <div class="p20">

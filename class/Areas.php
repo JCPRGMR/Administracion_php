@@ -3,7 +3,12 @@
     class Areas extends Conexion{
         public static function Insertar(Object $datos){
             if(strlen($datos->des_area) <= 0 || is_null($datos->des_area)){
-                header('Location: ../view/Areas.php');
+                if($datos->insertar_area == 'omision'){
+                    header('Location: ../view/Empleados_insertar.php?back=omision');
+                }
+                if($datos->insertar_area == 'control'){
+                    header('Location: ../view/Empleados_insertar.php?back=control');
+                }
             }else{
                 $des_area = strtoupper($datos->des_area);
                 try {
@@ -11,10 +16,22 @@
                     $stmt = Conexion::Conectar()->prepare($sql);
                     $stmt->bindParam(1, $des_area, PDO::PARAM_STR);
                     $stmt->execute();
-                    header('Location: ../view/Areas.php');
+                    if($datos->insertar_area == 'omision'){
+                        header('Location: ../view/Empleados_insertar.php?back=omision');
+                    }
+                    if($datos->insertar_area == 'control'){
+                        header('Location: ../view/Empleados_insertar.php?back=control');
+                    }
                 } catch (PDOException $th) {
                     echo $th->getMessage();
                 }
+                echo 'Error 1';
+            }
+            if($datos->insertar_area == 'omision'){
+                header('Location: ../view/Empleados_insertar.php?back=omision');
+            }
+            if($datos->insertar_area == 'control'){
+                header('Location: ../view/Empleados_insertar.php?back=control');
             }
         }
         public static function Modificar(object $datos){

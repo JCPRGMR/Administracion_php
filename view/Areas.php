@@ -1,6 +1,10 @@
 <?php include("../templates/header.php")?>
 <?php include("../class/Areas.php")?>
-
+<style>
+    main{
+        overflow: auto;
+    }
+</style>
 <link rel="stylesheet" href="../css/styles2.css">
 <link rel="stylesheet" href="../css/escalables0.css">
 <form action="../request/Areas.php" method="post">

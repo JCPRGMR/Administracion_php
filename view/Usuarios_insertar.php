@@ -67,10 +67,10 @@
             <label for="" class="w-t bg-black-blue">
                 Rol
             </label>
-            <select name="ciudad" id="ciudad" class="campo" required>
+            <select name="rol" id="ciudad" class="campo" required>
                 <?php foreach(Roles::Mostrar() as $item): ?>
-                <option value="<?= $item->id_ciudad ?>">
-                    <?= $item->des_ciudad ?>
+                <option value="<?= $item->id_rol ?>">
+                    <?= $item->des_rol ?>
                 </option>
                 <?php endforeach; ?>
             </select>

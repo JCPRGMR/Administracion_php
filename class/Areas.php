@@ -31,7 +31,7 @@
         }        
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM areas";
+                $sql = "SELECT * FROM areas ORDER BY f_registro_area DESC, h_registro_area DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);

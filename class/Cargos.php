@@ -32,7 +32,7 @@
         }
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM cargos";
+                $sql = "SELECT * FROM cargos ORDER BY f_registro_cargo DESC, h_registro_cargo DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);

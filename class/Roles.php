@@ -13,7 +13,7 @@
         }
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM roles";
+                $sql = "SELECT * FROM roles ORDER BY f_registro_rol DESC, h_registro_rol DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);

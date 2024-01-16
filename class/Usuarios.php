@@ -2,6 +2,37 @@
     require_once("../connection/Conexion.php");
     class Usuarios extends Conexion{
         public static function Insertar(object $datos){
+            try {
+                $sql = "INSERT INTO usuarios(
+                usuario,
+                contrasena,
+                id_fk_rol,
+                id_fk_empleado,
+                f_registro_usuario,
+                h_registro_usuario,
+                alter_usuario
+                ) VALUES(
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?,
+                    ?);";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $datos->nombres, PDO::PARAM_STR);
+                $stmt->bindParam(2, $datos->Contrasena, PDO::PARAM_STR);
+                $stmt->bindParam(4, $datos->rol, PDO::PARAM_INT);
+                $stmt->bindParam(3, $datos->empleado, PDO::PARAM_INT);
+                $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
+                $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
+                $stmt->execute();
+                header('Location: ../view/Usuarios.php');
+            } catch (PDOException $th) {
+                echo $th;
+                // header('Location: ../view/Usuarios.php');
+            }
         }
         public static function Modificar(object $datos){}
         public static function Mostrar(){

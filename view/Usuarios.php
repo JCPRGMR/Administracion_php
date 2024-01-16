@@ -85,9 +85,9 @@
 <div class="head">
     <!-- <a href="" id="open-modal" onclick="localStorage.clear()">Agregar empleados</a> -->
     <div class="container-camps p10">
-        <a href="Usuarios_insertar.php" class="btn bg-black-blue" onclick="localStorage.clear()">
+        <!-- <a href="Usuarios_insertar.php" class="btn bg-black-blue" onclick="localStorage.clear()">
             Agregar Usuarios
-        </a>
+        </a> -->
     </div>
     <div class="filtros">
         <input type="search" class="campo input-w-btn" autofocus name="buscador" id="buscador" placeholder="Buscador" onkeyup="filterTable()">

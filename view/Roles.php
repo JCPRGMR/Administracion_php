@@ -4,6 +4,9 @@
         background-color: white;
         color: black;
     }
+    main{
+        overflow: auto;
+    }
 </style>
 
 <link rel="stylesheet" href="../css/styles2.css">

@@ -1,8 +1,14 @@
 <?php
 
-use FontLib\Table\Type\post;
+    // use FontLib\Table\Type\post;
+    require '../vendor/autoload.php';
+
+    use PhpOffice\PhpSpreadsheet\IOFactory;
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
     require_once("../connection/Conexion.php");
+    require("../class/Cargos.php");
     class Empleados extends Conexion{
         public static function Insertar(object $datos){
             try {
@@ -115,6 +121,81 @@ use FontLib\Table\Type\post;
                 return $res;
             } catch (PDOException $th) {
                 return null;
+            }
+        }
+        public function UCFormat(){
+            $rango = range('A', 'Z'); 
+            $size_rango = count($rango);
+            $rango[$size_rango] = 'ZZ';
+            return $rango;
+        }
+        public static function Importar_Excel($file){
+            $funcion = new self();
+            $file = $file['tmp_name'];
+            if (!empty($file) && is_uploaded_file($file)) {
+
+                $hoja_de_trabajo = IOFactory::load($file)->getActiveSheet();
+
+                $ColumnLetter = $funcion->UCFormat();
+
+                $data = [];
+
+                $heightRow = $hoja_de_trabajo->getHighestRow();
+
+                for($row = 2; $row <= $heightRow; $row++){
+                    $rowData = [];
+                    foreach ($ColumnLetter as $column) {
+                        $rowData[] = $hoja_de_trabajo->getCell($column . $row)->getValue();
+                    }
+                    $data[] = $rowData;
+                }
+                //FOREACH INSERTAR DATOS ESCALABLES 
+                foreach($data as $celda){
+                    $carnet = $celda[1];
+                    $apellidos = $celda[2] . ' ' . $celda[3];
+                    $nombres = $celda[4] . ' ' . $celda[5];
+
+                    $cargos = Cargos::UltimoID($celda[6]);
+
+                    echo '<pre>carnet:';
+                    echo $carnet;
+                    echo ' Apellidos:';
+                    echo $apellidos;
+                    echo ' Nombres:';
+                    echo $nombres;
+                    self::Insertar_excel($carnet, $apellidos, $nombres, $cargos);
+                    Cargos::Cargo_excel($cargos);
+                }
+            }else{
+                echo 'Error al subir el archivo';
+            }
+        }
+        public static function Insertar_excel($carnet, $apellidos, $nombres, $cargo){
+            try {
+                if(self::Buscar_carnet($carnet)){
+
+                }else{
+                    $sql = "INSERT INTO empleados (
+                    nombres, 
+                    apellidos, 
+                    ci,
+                    id_fk_cargo,
+    
+                    f_registro_empleado,
+                    h_registro_empleado,
+                    alter_empleado) 
+                    VALUES(?,?,?, ?, NOW(),NOW(),NOW())";
+    
+                    $stmt = Conexion::Conectar()->prepare($sql);
+                    $stmt->bindParam(1, $nombres, PDO::PARAM_STR);
+                    $stmt->bindParam(2, $apellidos, PDO::PARAM_STR);
+                    $stmt->bindParam(3, $carnet, PDO::PARAM_STR);
+    
+                    $stmt->bindParam(4, $cargo, PDO::PARAM_INT);
+                    $stmt->execute();
+                }
+            } catch (PDOException $th) {
+                $th->getMessage();
             }
         }
     }

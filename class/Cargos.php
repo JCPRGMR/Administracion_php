@@ -57,5 +57,36 @@
                 echo $th;
             }
         }
+        public static function Cargo_excel($des_cargo){
+            try {
+                if(strlen($des_cargo) != 0){
+                    $sql = "SELECT id_cargo FROM cargos WHERE des_cargo LIKE ?";
+                    $stmt = Conexion::Conectar()->prepare($sql);
+                    $stmt->bindParam(1, $des_cargo, PDO::PARAM_STR);
+                    if($stmt->execute()){
+                        $resultado = $stmt->fetchColumn();
+                        if(!$resultado){
+                            $cargo = strtoupper($des_cargo);
+                            $sql = "INSERT INTO cargos (des_cargo, f_registro_cargo, h_registro_cargo, alter_cargo) VALUES(?,NOW(),NOW(),NOW())";
+                            $stmt = Conexion::Conectar()->prepare($sql);
+                            $stmt->bindParam(1, $cargo, PDO::PARAM_STR);
+                            $stmt->execute();
+                        }
+                    }
+                }
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
+        public static function UltimoID(){
+            try {
+                $sql = "SELECT id_cargo FROM cargos ORDER BY id_cargo DESC LIMIT 1";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchColumn();
+            } catch (PDOException $th) {
+                return $th->getMessage();
+            }
+        }
     }
 ?>

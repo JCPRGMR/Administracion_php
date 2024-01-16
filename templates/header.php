@@ -94,7 +94,7 @@
                     </a>
                 <?php endif; ?>
                 <a href="../request/cerrar_sesion.php">
-                    <li class="item-list">Cerrar sesion</li>
+                    <li class="item-list" style="font-weight: bold; color: red;">Cerrar sesion</li>
                 </a>
             </ul>
         </nav>

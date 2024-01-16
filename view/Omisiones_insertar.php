@@ -63,7 +63,10 @@
     }
     .select{
         position: relative;
-        background-color: yellow;
+        background-color: white;
+        flex-direction: row;
+        box-shadow: 0 0 5px .1px black;
+        align-items: center;
     }
 </style>
 <form action="../request/Omisiones.php" method="post" class="form">
@@ -71,7 +74,7 @@
         Registro de omision
     </header>
     <div class="container-camps">
-        <div class="select" style="background-color: red; width: 100%;">
+        <div class="select" style="width: 100%;">
             <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <div class="option" >
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
@@ -81,8 +84,8 @@
                 </label>
                 <?php endforeach ?>
             </div>
+            <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
-        <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         <div class="select-w-btn" style="visibility: hidden; position: absolute;">
             <label for="" class="w-t bg-black-blue">
                 Ciudad

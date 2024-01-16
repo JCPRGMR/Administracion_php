@@ -112,7 +112,8 @@
     }
     .select{
         position: relative;
-        background-color: yellow;
+        background-color: white;
+        align-items: center;
     }
 </style>
 <a href="Control_pdf_filtro.php" class="pdf">
@@ -133,7 +134,7 @@
             </select>
             <a href="Ciudades.php" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
-        <div class="select" style="background-color: red; width: 100%;">
+        <div class="select" style="width: 100%; display: flex; flex-direction: row; box-shadow: 0 0 5px 1px black;">
             <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <div class="option" >
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
@@ -143,8 +144,8 @@
                 </label>
                 <?php endforeach ?>
             </div>
+            <a href="Empleados_insertar.php?back=control" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
-        <a href="Empleados_insertar.php?back=control" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         <button type="submit" name="insertar_ingreso" value="<?= $item->id_control ?>" onclick="localStorage.clear()">
             Registrar Ingreso
         </button>

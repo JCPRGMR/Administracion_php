@@ -3,6 +3,9 @@
     class Cargos extends Conexion{
         public static function Insertar(Object $datos){
             if(strlen($datos->des_cargo) <= 0 || is_null($datos->des_cargo)){
+                if($datos->insertar_cargo == 'usuarios'){
+                    header('Location: ../view/Empleados_insertar.php?back=usuarios');
+                }
                 if($datos->insertar_cargo == 'omision'){
                     header('Location: ../view/Empleados_insertar.php?back=omision');
                 }
@@ -16,6 +19,9 @@
                     $stmt = Conexion::Conectar()->prepare($sql);
                     $stmt->bindParam(1, $des_cargo, PDO::PARAM_STR);
                     $stmt->execute();
+                    if($datos->insertar_cargo == 'usuarios'){
+                        header('Location: ../view/Empleados_insertar.php?back=usuarios');
+                    }
                     if($datos->insertar_cargo == 'omision'){
                         header('Location: ../view/Empleados_insertar.php?back=omision');
                     }
@@ -25,6 +31,9 @@
                 } catch (PDOException $th) {
                     echo $th->getMessage();
                 }
+            }
+            if($datos->insertar_cargo == 'usuarios'){
+                header('Location: ../view/Empleados_insertar.php?back=usuarios');
             }
             if($datos->insertar_cargo == 'omision'){
                 header('Location: ../view/Empleados_insertar.php?back=omision');

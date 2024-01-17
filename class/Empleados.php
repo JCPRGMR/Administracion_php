@@ -8,7 +8,7 @@
     use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
     require_once("../connection/Conexion.php");
-    require("../class/Cargos.php");
+    require_once("../class/Cargos.php");
     class Empleados extends Conexion{
         public static function Insertar(object $datos){
             try {
@@ -45,7 +45,9 @@
 
                     $redirectPage = isset($datos->insertar_usuario) ? (
                         $datos->insertar_usuario == 'control' ? 'Control.php' : (
-                            $datos->insertar_usuario == 'omision' ? 'Omisiones_insertar.php' : $defaultPage
+                            $datos->insertar_usuario == 'omision' ? 'Omisiones_insertar.php' : (
+                                $datos->insertar_usuario == 'usuarios' ? 'Usuarios_insertar.php' : $defaultPage
+                            )
                         )
                     ) : $defaultPage;
 
@@ -58,18 +60,60 @@
 
                 $redirectPage = isset($datos->insertar_usuario) ? (
                     $datos->insertar_usuario == 'control' ? 'Control.php' : (
-                        $datos->insertar_usuario == 'omision' ? 'Omisiones_insertar.php' : $defaultPage
+                        $datos->insertar_usuario == 'omision' ? 'Omisiones_insertar.php' : (
+                            $datos->insertar_usuario == 'usuarios' ? 'Usuarios_insertar.php' : $defaultPage
+                        )
                     )
                 ) : $defaultPage;
 
                 header("Location: ../view/" . $redirectPage);
             }
         }
+        public static function Buscar_Empleado($id){
+            try {
+                $sql = "SELECT * FROM vista_empleados WHERE id_empleado = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                $stmt->execute();
+                $resultado = $stmt->fetch(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
         public static function Modificar(object $datos){
             try {
-                $sql = "";
-            } catch (\Throwable $th) {
-                //throw $th;
+                $expedido = strtoupper($datos->expedido);
+                $sql = "UPDATE empleados SET
+
+                nombres = ?,
+                apellidos = ?,
+
+                ci = ?,
+                expedido = ?,
+                celular = ?,
+
+                id_fk_area = ?,
+                id_fk_cargo = ?,
+                alter_empleado = ? WHERE id_empleado = ?
+                ";
+
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $datos->nombres, PDO::PARAM_STR);
+                $stmt->bindParam(2, $datos->apellidos, PDO::PARAM_STR);
+                $stmt->bindParam(3, $datos->carnet, PDO::PARAM_STR);
+                $stmt->bindParam(4, $expedido, PDO::PARAM_STR);
+                $stmt->bindParam(5, $datos->celular, PDO::PARAM_INT);
+
+                $stmt->bindParam(6, $datos->area, PDO::PARAM_INT);
+                $stmt->bindParam(7, $datos->cargo, PDO::PARAM_INT);
+
+                $stmt->bindParam(8, date('Y-m-d H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(9, $datos->modificar, PDO::PARAM_STR);
+                $stmt->execute();
+                header("Location: ../view/Empleados.php");
+            } catch (PDOException $th) {
+                echo $th->getMessage();
             }
         }
         public static function Eliminar(object $datos){

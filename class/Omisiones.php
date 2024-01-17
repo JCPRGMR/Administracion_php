@@ -51,6 +51,18 @@
                 echo $th;
             }
         }
+        public static function Mostrar_Area($post){
+            try {
+                $sql = "SELECT * FROM vista_omisiones WHERE id_fk_area = ? ORDER BY f_registro_omision DESC, h_registro_omision DESC";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $post, PDO::PARAM_INT);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
         public static function Eliminar(object $post){
             try {
                 $sql = "DELETE FROM omisiones WHERE id_omision = ?";

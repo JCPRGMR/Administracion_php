@@ -1,4 +1,5 @@
 <?php
-    require_once("../class/Areas.php");
-    require_once("../class/Cargos.php");
+    require("../class/Areas.php");
+    require("../class/Cargos.php");
+    require("../class/Empleados.php");
 ?>

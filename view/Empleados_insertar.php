@@ -58,7 +58,7 @@
                     <option value="<?= $item->id_area ?>"><?= $item->des_area ?></option>
                     <?php endforeach; ?>
                 </select>
-                <a href="Areas.php<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? '?ruta=control' : ($_GET['back'] == 'omision' ? '?ruta=omision' : '')) : ''; ?>" class="w-btn bg-black-blue">Anadir</a>
+                <a href="Areas.php<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? '?ruta=control' : ($_GET['back'] == 'omision' ? '?ruta=omision' : ($_GET['back'] == 'usuarios' ? '?ruta=usuarios': '' ))) : ''; ?>" class="w-btn bg-black-blue">Anadir</a>
             </div>
             <div class="select-w-btn">
                 <label for="" class="w-t">Cargo</label>
@@ -67,7 +67,7 @@
                     <option value="<?= $item->id_cargo ?>"><?= $item->des_cargo ?></option>
                     <?php endforeach; ?>
                 </select>
-                <a href="Cargos.php<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? '?ruta=control' : ($_GET['back'] == 'omision' ? '?ruta=omision' : '')) : ''; ?>" class="w-btn bg-black-blue">Anadir</a>
+                <a href="Cargos.php<?= isset($_GET['back']) ? ($_GET['back'] == 'control' ? '?ruta=control' : ($_GET['back'] == 'omision' ? '?ruta=omision' : ($_GET['back'] == 'usuarios' ? '?ruta=usuarios': '' ))) : ''; ?>" class="w-btn bg-black-blue">Anadir</a>
             </div>
         </div>
         <div class="container-cmaps p10">

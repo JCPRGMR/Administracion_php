@@ -236,30 +236,30 @@
     }
 </script>
 
-  <script>
-    const radios = document.querySelectorAll('input[name="id_empleado"]');
-    const busquedaInput = document.getElementById('id_empleado');
+<script>
+const radios = document.querySelectorAll('input[name="id_empleado"]');
+const busquedaInput = document.getElementById('id_empleado');
 
-    radios.forEach(radio => {
-    radio.addEventListener('change', (event) => {
-        const label = event.target.parentElement;
-        const labelText = label.textContent.trim();
-        busquedaInput.value = labelText;
-    });
-    });
+radios.forEach(radio => {
+radio.addEventListener('change', (event) => {
+    const label = event.target.parentElement;
+    const labelText = label.textContent.trim();
+    busquedaInput.value = labelText;
+});
+});
 
-    busquedaInput.addEventListener('input', () => {
-    const searchTerm = busquedaInput.value.toLowerCase();
+busquedaInput.addEventListener('input', () => {
+const searchTerm = busquedaInput.value.toLowerCase();
 
-    radios.forEach(radio => {
-        const label = radio.parentElement;
-        const optionText = label.textContent.toLowerCase();
+radios.forEach(radio => {
+    const label = radio.parentElement;
+    const optionText = label.textContent.toLowerCase();
 
-        if (optionText.includes(searchTerm)) {
-        label.style.display = 'block';
-        } else {
-        label.style.display = 'none';
-        }
-    });
-    });
-  </script>
+    if (optionText.includes(searchTerm)) {
+    label.style.display = 'block';
+    } else {
+    label.style.display = 'none';
+    }
+});
+});
+</script>

@@ -111,7 +111,7 @@
             <!-- <th>ACCIONES</th> -->
         </thead>
         <tbody>
-            <?php foreach(Omisiones::Mostrar() as $item):?>
+            <?php foreach(Omisiones::Mostrar_Area($_SESSION['usuario']->id_fk_area) as $item):?>
             <tr>
                 <td><?= $item->des_ciudad ?></td>
                 <td><?= $item->nombres ?></td>

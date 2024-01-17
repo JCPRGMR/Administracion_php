@@ -128,7 +128,7 @@
         <textarea name="justificacion" id="justificacion" cols="30" rows="10" placeholder="Justificacion" class="input-w-t campo"></textarea>
     </div>
     <div class="container-camps">
-        <button type="submit" class="btn bg-black-blue" name="nueva_omision">Regsitrar</button>
+        <button type="submit" class="btn bg-black-blue" name="nueva_omision">Registrar</button>
     </div>
 </form>
 <script>

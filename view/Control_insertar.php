@@ -32,9 +32,9 @@
     }
 </style>
 <form action="../request/Controles.php" method="post" class="form">
-    <header class="p20 uper-bold">
+    <div class="p20 uper-bold">
         Registro de control
-    </header>
+    </div>
     <div class="container-camps">
         <div class="select-w-btn">
             <label for="" class="w-t bg-black-blue">

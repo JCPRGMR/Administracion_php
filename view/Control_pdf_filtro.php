@@ -43,9 +43,9 @@
     }
 </style>
 <form action="Control_pdf.php" method="post" class="form" target="_blank">
-    <header class="p20 uper-bold">
+    <div class="p20 uper-bold">
         Filtrar datos para el pdf de control
-    </header>
+    </div>
     <div class="contenedor p20">
         <div class="select-w-btn">
             <label for="" class="w-t bg-black-blue">Por Documento de identidad</label>

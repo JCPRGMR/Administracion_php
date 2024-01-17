@@ -35,9 +35,9 @@
     }
 </style>
 <form action="../request/Controles.php" method="post" class="form">
-    <header class="p20 uper-bold">
+    <div class="p20 uper-bold">
         Detalles de ingreso
-    </header>
+    </div>
     <div class="container-camps">
         <textarea name="obs_ingreso" id="Observaciones" cols="30" rows="10" placeholder="Observaciones..." class="input-w-t campo"></textarea>
     </div>

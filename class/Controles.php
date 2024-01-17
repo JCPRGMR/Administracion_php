@@ -41,7 +41,6 @@
                 $post = $stmt->fetchObject();
                 header("Location: ../view/Control_ingreso.php?id=". $post->id_control);
             } catch (PDOException $th) {
-                echo $th;
                 header("Location: ../view/Control.php");
             }
         }
@@ -84,7 +83,6 @@
                 $post = $stmt->fetchObject();
                 header("Location: ../view/Control_salida.php?id=". $post->id_control);
             } catch (PDOException $th) {
-                echo $th;
                 header("Location: ../view/Control.php");
             }
         }

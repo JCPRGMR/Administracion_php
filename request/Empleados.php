@@ -16,8 +16,6 @@
                 'empleados',
                 'areas',
                 'cargos',
-                'ciudades',
-                'roles',
             ];
         
             foreach ($tablas as $tabla) {

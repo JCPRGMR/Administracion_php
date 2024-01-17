@@ -63,15 +63,15 @@
                         header("Location: ../view/Control.php");
                     }else{
                         $msg =  'El usuario no existe';
-                        header('Location: ../index.php' . urlencode($msg));
+                        header('Location: ../index.php');
                     }
                 }else{
                     $msg =  'llene los campos';
-                    header('Location: ../index.php?msg=' . urlencode($msg));
+                    header('Location: ../index.php');
                 }
             } catch (PDOException $th) {
-                $th->getMessage();
-                header("Location: ../view/Control.php");
+                echo 'Ocurrio un error con la base de datos: ' . $th->getMessage();
+                echo '<br>Comuniquese con el area de sistemas';
             }
         }
 

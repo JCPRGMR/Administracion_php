@@ -70,9 +70,9 @@
     }
 </style>
 <form action="../request/Omisiones.php" method="post" class="form">
-    <header class="p20 uper-bold">
+    <div class="p20 uper-bold">
         Registro de omision
-    </header>
+    </div>
     <div class="container-camps">
         <div class="select" style="width: 100%;">
             <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">

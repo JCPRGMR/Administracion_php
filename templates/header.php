@@ -78,10 +78,10 @@
             </div>
             <ul class="container-list">
                 <a href="../view/Omisiones.php">
-                    <li class="item-list">Omisiones</li>
+                    <li class="item-list">Omisiones, Permisos y Marcaciones</li>
                 </a>
                 <a href="../view/Control.php">
-                    <li class="item-list">Control de personal</li>
+                    <li class="item-list">Ingreso y Salida de personal</li>
                 </a>
                 <a href="../view/Empleados.php">
                     <li class="item-list">Registro de personal</li>

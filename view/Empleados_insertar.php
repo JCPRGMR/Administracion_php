@@ -13,9 +13,9 @@
 </style>
 <main>
     <form action="../request/Empleados.php" method="post" class="form">
-        <header class="p20 uper-bold">
+        <div class="p20 uper-bold">
             Formulario para el registro de personal desde <?= (isset($_GET['back'])) ? $_GET['back'] : 'PERSONAL' ; ?>
-        </header>
+        </div>
         <div class="container-camps">
             <div class="input-w-t">
                 <label class="w-t">

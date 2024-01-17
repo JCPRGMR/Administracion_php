@@ -9,6 +9,7 @@
     <form action="../request/Empleados.php" method="post" enctype="multipart/form-data">
         <input type="file" name="Subir" id="">
         <button type="submit" name="send_excel">Subir</button>
+        <button type="submit" name="del_bdd">Limpiar base de datos</button>
     </form>
 </body>
 </html>

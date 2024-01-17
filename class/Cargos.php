@@ -78,10 +78,11 @@
                 echo $th;
             }
         }
-        public static function UltimoID(){
+        public static function buscar_cargo($cargo){
             try {
-                $sql = "SELECT id_cargo FROM cargos ORDER BY id_cargo DESC LIMIT 1";
+                $sql = "SELECT id_cargo FROM cargos WHERE des_cargo = ? LIMIT 1";
                 $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $cargo, PDO::PARAM_STR);
                 $stmt->execute();
                 return $stmt->fetchColumn();
             } catch (PDOException $th) {

@@ -149,22 +149,25 @@
                     }
                     $data[] = $rowData;
                 }
-                //FOREACH INSERTAR DATOS ESCALABLES 
+                // foreach para importar los cargos
+                foreach($data as $celda){
+                    Cargos::Cargo_excel($celda[6]);
+                }
+                // foreach para importar los empleados
                 foreach($data as $celda){
                     $carnet = $celda[1];
                     $apellidos = $celda[2] . ' ' . $celda[3];
                     $nombres = $celda[4] . ' ' . $celda[5];
 
-                    $cargos = Cargos::UltimoID($celda[6]);
+                    $cargos = Cargos::buscar_cargo($celda[6]);
 
-                    echo '<pre>carnet:';
-                    echo $carnet;
-                    echo ' Apellidos:';
-                    echo $apellidos;
-                    echo ' Nombres:';
-                    echo $nombres;
+                    // echo '<pre>carnet:';
+                    // echo $carnet;
+                    // echo ' Apellidos:';
+                    // echo $apellidos;
+                    // echo ' Nombres:';
+                    // echo $nombres;
                     self::Insertar_excel($carnet, $apellidos, $nombres, $cargos);
-                    Cargos::Cargo_excel($cargos);
                 }
             }else{
                 echo 'Error al subir el archivo';

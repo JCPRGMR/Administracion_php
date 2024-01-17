@@ -12,6 +12,9 @@
                 if($datos->insertar_area == 'control'){
                     header('Location: ../view/Empleados_insertar.php?back=control');
                 }
+                if($datos->insertar_area == ''){
+                    header('Location: ../view/Empleados.php');
+                }
             }else{
                 $des_area = strtoupper($datos->des_area);
                 try {
@@ -28,6 +31,9 @@
                     if($datos->insertar_area == 'control'){
                         header('Location: ../view/Empleados_insertar.php?back=control');
                     }
+                    if($datos->insertar_area == ''){
+                        header('Location: ../view/Empleados.php');
+                    }
                     header('Location: ../view/Empleados_modificar.php');
                 } catch (PDOException $th) {
                     echo $th->getMessage();
@@ -41,7 +47,9 @@
                 if($datos->insertar_area == 'control'){
                     header('Location: ../view/Empleados_insertar.php?back=control');
                 }
-                header('Location: ../view/Empleados_modificar.php');
+                if($datos->insertar_area == ''){
+                    header('Location: ../view/Empleados.php');
+                }
             }
             if($datos->insertar_area == 'usuarios'){
                 header('Location: ../view/Usuarios_insertar.php?back=usuarios');
@@ -52,7 +60,9 @@
             if($datos->insertar_area == 'control'){
                 header('Location: ../view/Empleados_insertar.php?back=control');
             }
-            header('Location: ../view/Empleados_modificar.php');
+            if($datos->insertar_area == ''){
+                header('Location: ../view/Empleados.php');
+            }
         }
         public static function Modificar(object $datos){
             try {

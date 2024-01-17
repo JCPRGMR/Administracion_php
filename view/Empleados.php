@@ -87,6 +87,9 @@
         <a href="Empleados_insertar.php" class="btn bg-black-blue" onclick="localStorage.clear()">
             Agregar Personal
         </a>
+        <a href="Areas.php" class="btn bg-black-blue" onclick="localStorage.clear()">
+            Agregar Area
+        </a>
     </div>
     <div class="filtros">
         <input type="search" class="campo input-w-btn" autofocus name="buscador" id="buscador" placeholder="Buscador" onkeyup="filterTable()">

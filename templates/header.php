@@ -6,6 +6,9 @@
         display: flex;
         width: 40px;
     }
+    main{
+        overflow: auto;
+    }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +35,7 @@
         <div class="user-box">
             <label class="user-data b-shadow-5-1-gray" for="user">
                 <div class="user-name p10">
-                    <?= $_SESSION['usuario']->usuario ?>
+                    <?= $_SESSION['usuario']->nombres ?>
                 </div>
                 <div class="user-pic pic-z30 p5">
                 </div>

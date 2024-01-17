@@ -54,6 +54,8 @@
         position: absolute;
         right: 0px;
         top: 30px;
+        max-height: 300px;
+        overflow: auto;
     }
     .option:hover{
         visibility: visible;
@@ -66,10 +68,13 @@
         background-color: white;
         align-items: center;
     }
+    .form{
+        overflow: hidden;
+    }
 </style>
 <form action="../request/Usuarios.php" method="post" class="form">
     <div class="p20 uper-bold">
-        Registro de omision
+        Asignar cuenta de usuario
     </div>
     <div class="container-camps">
         <div class="input-w-t">

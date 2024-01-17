@@ -110,6 +110,8 @@
         position: absolute;
         right: 0px;
         top: 30px;
+        max-height: 300px;
+        overflow: auto;
     }
     .option:hover{
         visibility: visible;

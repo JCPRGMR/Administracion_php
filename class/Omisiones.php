@@ -37,7 +37,7 @@
                 $stmt->execute();
                 header("Location: ../view/Omisiones.php");
             } catch (PDOException $th) {
-                echo $th;
+                header("Location: ../view/Omisiones_insertar.php");
             }
         }
         public static function Mostrar(){

@@ -111,6 +111,17 @@
                 echo $th;
             }
         }
+        public static function Mostrar_ID(){
+            try {
+                $sql = "SELECT * FROM vista_empleados ORDER BY id_empleado DESC";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                echo $th;
+            }
+        }
         public static function Buscar_carnet($carnet){
             try {
                 $sql = "SELECT * FROM empleados WHERE ci = ?";

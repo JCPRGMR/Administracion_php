@@ -8,10 +8,9 @@
     }
     main{
         flex-direction: column;
-        overflow: scroll;
+        overflow: auto;
     }
     th{
-        padding: 10px;
         position: sticky;
         top: -5px;
     }
@@ -19,8 +18,13 @@
         width: 100%;
         border-collapse: collapse;
     }
+    td{
+        width: 100px;
+        white-space: nowrap;
+        overflow: auto;
+    }
     .tabla{
-        overflow: scroll;
+        overflow: auto;
     }
     .head{
         padding: 0 10px;
@@ -67,10 +71,6 @@
         bottom: 20px;
         right: 20px;
     }
-    td:last-child{
-        text-align: center;
-        max-width: 40px;
-    }
     .btn-small{
         cursor: pointer;
         border-radius: 50%;
@@ -116,6 +116,7 @@
 <div class="tabla">
     <table border="1" id="myTable">
         <thead>
+            <th class="uper-bold bg-black-blue">ID</th>
             <th class="uper-bold bg-black-blue">Nombres</th>
             <th class="uper-bold bg-black-blue">Carnet</th>
             <th class="uper-bold bg-black-blue">Area</th>
@@ -123,8 +124,9 @@
             <!-- <th class="uper-bold bg-black-blue">Acciones</th> -->
         </thead>
         <tbody>
-            <?php foreach(Empleados::Mostrar() as $item): ?>
+            <?php foreach(Empleados::Mostrar_ID() as $item): ?>
             <tr>
+                <td align="center" class="p10"><?= $item->id_empleado ?></td>
                 <td align="center" class="p10"><?= $item->nombres ?></td>
                 <td align="center" class="p10"><?= $item->ci ?></td>
                 <td align="center" class="p10"><?= $item->des_area ?></td>

@@ -13,7 +13,7 @@
             <label for="area" class="w-t">Area</label>
             <input type="text" name="des_area" id="area" class="campo" autofocus>
         </div>
-        <button type="submit" class="btn bg-black-blue" name="insertar_area" value="<?= $_GET['ruta'] ?>">Registrar area</button>
+        <button type="submit" class="btn bg-black-blue" name="insertar_area" value="<?= (!isset($_GET['ruta']))? '' : $_GET['ruta'] ?>">Registrar area</button>
     </div>
 </form>
 <div class="p20">

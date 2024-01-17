@@ -38,9 +38,16 @@
     td {
         text-align: center;
         white-space: nowrap;
-        text-overflow: ellipsis;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        align-items: center;
+    }
+    .obs {
+        text-align: center;
+        white-space: nowrap;
         overflow: auto;
-        max-width: 120px;
+        max-width: 100px;
     }
     td > button{
         cursor: pointer;
@@ -184,7 +191,7 @@
                             <?= $item->ingreso ?>
                         <?php endif; ?>
                     </td>
-                    <td><?= $item->obs_ingreso ?></td>
+                    <td class="obs" ><?= $item->obs_ingreso ?></td>
                     <td>
                         <?php if (is_null($item->salida)) : ?>
                             <form action="../request/Controles.php" method="post">
@@ -196,7 +203,7 @@
                             <?= $item->salida ?>
                         <?php endif; ?>
                     </td>
-                    <td><?= $item->obs_salida ?></td>
+                    <td class="obs" ><?= $item->obs_salida ?></td>
                     <td><?= $item->f_registro_control ?></td>
                 </tr>
             <?php endforeach; ?>

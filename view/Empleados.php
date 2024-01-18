@@ -113,7 +113,7 @@
     <table border="1" id="myTable">
         <thead>
             <th class="uper-bold bg-black-blue">ID</th>
-            <th class="uper-bold bg-black-blue">Nombres</th>
+            <th class="uper-bold bg-black-blue">Nombres y apellidos</th>
             <th class="uper-bold bg-black-blue">Carnet</th>
             <th class="uper-bold bg-black-blue">Area</th>
             <th class="uper-bold bg-black-blue">Cargo</th>
@@ -123,7 +123,7 @@
             <?php foreach(Empleados::Mostrar_ID() as $item): ?>
             <tr>
                 <td align="center" class="p10"><?= $item->id_empleado ?></td>
-                <td align="center" class="p10"><?= $item->nombres ?></td>
+                <td align="center" class="p10"><?= $item->nombres . ' ' . $item->apellidos?></td>
                 <td align="center" class="p10"><?= $item->ci ?></td>
                 <td align="center" class="p10"><?= $item->des_area ?></td>
                 <td align="center" class="p10"><?= $item->des_cargo ?></td>

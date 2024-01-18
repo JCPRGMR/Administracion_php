@@ -13,7 +13,7 @@
                     header('Location: ../view/Empleados_insertar.php?back=control');
                 }
                 if($datos->insertar_area == ''){
-                    header('Location: ../view/Empleados.php');
+                    header('Location: ../view/Empleados_insertar.php');
                 }
             }else{
                 $des_area = strtoupper($datos->des_area);
@@ -32,7 +32,7 @@
                         header('Location: ../view/Empleados_insertar.php?back=control');
                     }
                     if($datos->insertar_area == ''){
-                        header('Location: ../view/Empleados.php');
+                        header('Location: ../view/Empleados_insertar.php');
                     }
                     header('Location: ../view/Empleados_modificar.php');
                 } catch (PDOException $th) {
@@ -48,8 +48,9 @@
                     header('Location: ../view/Empleados_insertar.php?back=control');
                 }
                 if($datos->insertar_area == ''){
-                    header('Location: ../view/Empleados.php');
+                    header('Location: ../view/Empleados_insertar.php');
                 }
+                
             }
             if($datos->insertar_area == 'usuarios'){
                 header('Location: ../view/Usuarios_insertar.php?back=usuarios');

@@ -21,6 +21,8 @@
         padding: 10px 30px;
         font-weight: bold;
         text-transform: uppercase;
+        width: 100%;
+        text-align: center;
     }
     .b_chek{
         visibility: hidden;
@@ -113,6 +115,8 @@
                 <option value="hora(s)">Horas</option>
             </select>
         </div>
+    </div>
+    <div class="container-camps">
         <div class="radio">
             <input type="checkbox" name="Ingreso" class="b_chek" id="Ingreso" value="1">
             <label for="Ingreso" class="check">Ingreso</label>

@@ -80,16 +80,21 @@
                 <img src="../img/rtp_logo_blanco.png" alt="">
             </div>
             <ul class="container-list">
-                <a href="../view/Omisiones.php">
-                    <li class="item-list">Omisiones, Permisos y Marcaciones</li>
-                </a>
-                <a href="../view/Control.php">
-                    <li class="item-list">Ingreso y Salida de personal</li>
-                </a>
-                <a href="../view/Empleados.php">
-                    <li class="item-list">Registro de personal</li>
-                </a>
+                <?php if($_SESSION['usuario']->id_fk_area == 1): ?>
+                    <a href="../view/Control.php">
+                        <li class="item-list">Ingreso y Salida de personal</li>
+                    </a>
+                <?php endif; ?>
                 <?php if($_SESSION['usuario']->des_rol == 'Administrador'): ?>
+                    <a href="../view/Omisiones.php">
+                        <li class="item-list">Omisiones, Permisos y Marcaciones</li>
+                    </a>
+                    <a href="../view/Control.php">
+                        <li class="item-list">Ingreso y Salida de personal</li>
+                    </a>
+                    <a href="../view/Empleados.php">
+                        <li class="item-list">Registro de personal</li>
+                    </a>
                     <a href="../view/Usuarios.php" >
                         <li class="item-list">
                             Registro de usuarios

@@ -7,14 +7,17 @@
         flex-direction: column;
         overflow: auto;
     }
+
     table {
         width: 100%;
         overflow: scroll;
         border-collapse: collapse;
     }
-    .tabla{
+
+    .tabla {
         overflow: auto;
     }
+
     .header {
         background-color: rgb(43, 43, 43);
         width: 100%;
@@ -43,13 +46,15 @@
         font-size: 12px;
         align-items: center;
     }
+
     .obs {
         text-align: center;
         white-space: nowrap;
         overflow: auto;
         max-width: 100px;
     }
-    td > button{
+
+    td>button {
         cursor: pointer;
     }
 
@@ -62,12 +67,17 @@
         height: 5px;
     }
 
-    a:nth-child(2) .item-list {
+    <?php if ($_SESSION['usuario']->des_rol == 'Administrador') : ?>a:nth-child(2) .item-list {
         background-color: white;
         color: black;
     }
 
-    th {
+    <?php else : ?>a:nth-child(1) .item-list {
+        background-color: white;
+        color: black;
+    }
+
+    <?php endif; ?>th {
         padding: 10px;
         top: 0px;
         background-color: white;
@@ -86,25 +96,30 @@
         bottom: 10px;
         right: 10px;
     }
-    .option > label {
-      display: flex;
-      cursor: pointer;
-      background-color: rgb(43, 43, 43);
-      width: 100%;
-      color: white;
-      padding: 5px;
+
+    .option>label {
+        display: flex;
+        cursor: pointer;
+        background-color: rgb(43, 43, 43);
+        width: 100%;
+        color: white;
+        padding: 5px;
     }
-    .option > label:hover{
+
+    .option>label:hover {
         background-color: gray;
     }
-    #id_empleado{
+
+    #id_empleado {
         padding: 5px;
         border: none;
     }
-    #id_empleado:focus + div{
+
+    #id_empleado:focus+div {
         visibility: visible;
     }
-    .option{
+
+    .option {
         visibility: hidden;
         flex-direction: column;
         position: absolute;
@@ -113,13 +128,16 @@
         max-height: 300px;
         overflow: auto;
     }
-    .option:hover{
+
+    .option:hover {
         visibility: visible;
     }
-    .itemxd{
+
+    .itemxd {
         accent-color: purple;
     }
-    .select{
+
+    .select {
         position: relative;
         background-color: white;
         align-items: center;
@@ -133,24 +151,34 @@
 
 <form action="../request/Controles.php" method="post">
     <div class="container-camps">
-        <div class="select-w-btn" style="visibility: hidden; position: absolute;">
+        <div class="select-w-btn">
             <select name="id_ciudad" id="ciudad" class="campo" required>
-                <?php foreach (Ciudades::Mostrar() as $item) : ?>
-                    <option value="<?= $item->id_ciudad ?>">
-                        <?= $item->des_ciudad ?>
+                <?php if ($_SESSION['usuario']->id_fk_cargo == 76) : ?>
+                    <option value="1">
+                        LA PAZ
                     </option>
-                <?php endforeach; ?>
+                <?php elseif ($_SESSION['usuario']->id_fk_cargo == 75) : ?>
+                    <option value="2">
+                        EL ALTO
+                    </option>
+                <?php else : ?>
+                    <?php foreach (Ciudades::Mostrar() as $item) : ?>
+                        <option value="<?= $item->id_ciudad ?>">
+                            <?= $item->des_ciudad ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </select>
             <a href="Ciudades.php" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>
         <div class="select" style="width: 100%; display: flex; flex-direction: row; box-shadow: 0 0 5px 1px black;">
             <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
-            <div class="option" >
+            <div class="option" id="select">
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
-                <label>
-                <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
-                <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
-                </label>
+                    <label>
+                        <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
+                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo ?>
+                    </label>
                 <?php endforeach ?>
             </div>
             <a href="Empleados_insertar.php?back=control" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
@@ -161,7 +189,7 @@
         <button type="submit" name="insertar_salida" value="<?= $item->id_control ?>" onclick="localStorage.clear()">
             Registrar Salida
         </button>
-        
+
     </div>
 </form>
 <div class="tabla">
@@ -177,38 +205,106 @@
             <th>REGISTRO</th>
         </thead>
         <tbody>
-            <?php foreach (Controles::Mostrar() as $item) : ?>
-                <tr>
-                    <td><?= $item->des_ciudad ?></td>
-                    <td><?= $item->nombres . ' ' . $item->apellidos ?></td>
-                    <td><?= $item->des_area ?></td>
-                    <td>
-                        <?php if (is_null($item->ingreso)) : ?>
-                            <form action="../request/Controles.php" method="post">
-                                <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
-                                    Agregar ingreso
-                                </button>
-                            </form>
-                        <?php else : ?>
-                            <?= $item->ingreso ?>
-                        <?php endif; ?>
-                    </td>
-                    <td class="obs" ><?= $item->obs_ingreso ?></td>
-                    <td>
-                        <?php if (is_null($item->salida)) : ?>
-                            <form action="../request/Controles.php" method="post">
-                                <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
-                                    Agregar salida
-                                </button>
-                            </form>
-                        <?php else : ?>
-                            <?= $item->salida ?>
-                        <?php endif; ?>
-                    </td>
-                    <td class="obs" ><?= $item->obs_salida ?></td>
-                    <td><?= $item->f_registro_control ?></td>
-                </tr>
-            <?php endforeach; ?>
+            <?php if ($_SESSION['usuario']->id_fk_cargo == 76) : ?>
+                <?php foreach (Controles::MostrarLaPaz() as $item) : ?>
+                    <tr>
+                        <td><?= $item->des_ciudad ?></td>
+                        <td><?= $item->nombres . ' ' . $item->apellidos ?></td>
+                        <td><?= $item->des_area ?></td>
+                        <td>
+                            <?php if (is_null($item->ingreso)) : ?>
+                                <form action="../request/Controles.php" method="post">
+                                    <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
+                                        Agregar ingreso
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <?= $item->ingreso ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="obs"><?= $item->obs_ingreso ?></td>
+                        <td>
+                            <?php if (is_null($item->salida)) : ?>
+                                <form action="../request/Controles.php" method="post">
+                                    <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
+                                        Agregar salida
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <?= $item->salida ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="obs"><?= $item->obs_salida ?></td>
+                        <td><?= $item->f_registro_control ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php elseif ($_SESSION['usuario']->id_fk_cargo == 75) : ?>
+                <?php foreach (Controles::MostrarElAlto() as $item) : ?>
+                    <tr>
+                        <td><?= $item->des_ciudad ?></td>
+                        <td><?= $item->nombres . ' ' . $item->apellidos ?></td>
+                        <td><?= $item->des_area ?></td>
+                        <td>
+                            <?php if (is_null($item->ingreso)) : ?>
+                                <form action="../request/Controles.php" method="post">
+                                    <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
+                                        Agregar ingreso
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <?= $item->ingreso ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="obs"><?= $item->obs_ingreso ?></td>
+                        <td>
+                            <?php if (is_null($item->salida)) : ?>
+                                <form action="../request/Controles.php" method="post">
+                                    <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
+                                        Agregar salida
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <?= $item->salida ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="obs"><?= $item->obs_salida ?></td>
+                        <td><?= $item->f_registro_control ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <?php foreach (Controles::Mostrar() as $item) : ?>
+                    <tr>
+                        <td><?= $item->des_ciudad ?></td>
+                        <td><?= $item->nombres . ' ' . $item->apellidos ?></td>
+                        <td><?= $item->des_area ?></td>
+                        <td>
+                            <?php if (is_null($item->ingreso)) : ?>
+                                <form action="../request/Controles.php" method="post">
+                                    <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
+                                        Agregar ingreso
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <?= $item->ingreso ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="obs"><?= $item->obs_ingreso ?></td>
+                        <td>
+                            <?php if (is_null($item->salida)) : ?>
+                                <form action="../request/Controles.php" method="post">
+                                    <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
+                                        Agregar salida
+                                    </button>
+                                </form>
+                            <?php else : ?>
+                                <?= $item->salida ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="obs"><?= $item->obs_salida ?></td>
+                        <td><?= $item->f_registro_control ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </div>
@@ -239,29 +335,30 @@
 </script>
 
 <script>
-const radios = document.querySelectorAll('input[name="id_empleado"]');
-const busquedaInput = document.getElementById('id_empleado');
+    const radios = document.querySelectorAll('input[name="id_empleado"]');
+    const busquedaInput = document.getElementById('id_empleado');
+    const select = document.getElementById("select");
 
-radios.forEach(radio => {
-radio.addEventListener('change', (event) => {
-    const label = event.target.parentElement;
-    const labelText = label.textContent.trim();
-    busquedaInput.value = labelText;
-});
-});
+    radios.forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            const label = event.target.parentElement;
+            const labelText = label.textContent.trim();
+            busquedaInput.value = labelText;
+        });
+    });
 
-busquedaInput.addEventListener('input', () => {
-const searchTerm = busquedaInput.value.toLowerCase();
+    busquedaInput.addEventListener('input', () => {
+        const searchTerm = busquedaInput.value.toLowerCase();
 
-radios.forEach(radio => {
-    const label = radio.parentElement;
-    const optionText = label.textContent.toLowerCase();
+        radios.forEach(radio => {
+            const label = radio.parentElement;
+            const optionText = label.textContent.toLowerCase();
 
-    if (optionText.includes(searchTerm)) {
-    label.style.display = 'block';
-    } else {
-    label.style.display = 'none';
-    }
-});
-});
+            if (optionText.includes(searchTerm)) {
+                label.style.display = 'block';
+            } else {
+                label.style.display = 'none';
+            }
+        });
+    });
 </script>

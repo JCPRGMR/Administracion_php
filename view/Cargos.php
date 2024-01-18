@@ -20,7 +20,7 @@
             <label for="cargo" class="w-t">Cargo</label>
             <input type="text" name="des_cargo" id="cargo" class="campo" autofocus>
         </div>
-        <button type="submit" class="btn bg-black-blue" name="insertar_cargo" value="<?= $_GET['ruta'] ?>">Registrar cargo</button>
+        <button type="submit" class="btn bg-black-blue" name="insertar_cargo" value="<?= (!isset($_GET['ruta']))? '' : $_GET['ruta'] ?>">Registrar cargo</button>
     </div>
 </form>
 <div class="p20">

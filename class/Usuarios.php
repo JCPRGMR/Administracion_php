@@ -3,7 +3,7 @@
     class Usuarios extends Conexion{
         public static function Insertar(object $datos){
             try {
-                if(self::Contrasena_existe($datos->contrasena)){
+                if(!self::Contrasena_existe($datos->contrasena)){
                     header('Location: ../view/Usuarios.php');
                 }else{
                     $sql = "INSERT INTO usuarios

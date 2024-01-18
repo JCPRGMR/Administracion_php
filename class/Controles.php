@@ -127,6 +127,28 @@
                 return $th;
             }
         }
+        public static function MostrarElAlto(){
+            try {
+                $sql = "SELECT * FROM vista_controles WHERE f_registro_control = '". date('Y-m-d') ."' AND id_fk_ciudad = 2 ORDER BY f_registro_control DESC, h_registro_control DESC";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                return $th;
+            }
+        }
+        public static function MostrarLaPaz(){
+            try {
+                $sql = "SELECT * FROM vista_controles WHERE f_registro_control = '". date('Y-m-d') ."' AND id_fk_ciudad = 1 ORDER BY f_registro_control DESC, h_registro_control DESC";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->execute();
+                $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $resultado;
+            } catch (PDOException $th) {
+                return $th;
+            }
+        }
         public static function Modificar(object $post){
             try {
                 $sql = "UPDATE controles WHERE id_control = ?";

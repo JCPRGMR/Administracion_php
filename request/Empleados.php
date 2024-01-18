@@ -14,8 +14,6 @@
                 'controles',
                 'usuarios',
                 'empleados',
-                'areas',
-                'cargos',
             ];
         
             foreach ($tablas as $tabla) {

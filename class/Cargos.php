@@ -12,6 +12,9 @@
                 if($datos->insertar_cargo == 'control'){
                     header('Location: ../view/Empleados_insertar.php?back=control');
                 }
+                if($datos->insertar_cargo == ''){
+                    header('Location: ../view/Empleados_insertar.php');
+                }
             }else{
                 $des_cargo = strtoupper($datos->des_cargo);
                 try {
@@ -28,6 +31,9 @@
                     if($datos->insertar_cargo == 'control'){
                         header('Location: ../view/Empleados_insertar.php?back=control');
                     }
+                    if($datos->insertar_cargo == ''){
+                        header('Location: ../view/Empleados_insertar.php');
+                    }
                 } catch (PDOException $th) {
                     echo $th->getMessage();
                 }
@@ -40,6 +46,9 @@
             }
             if($datos->insertar_cargo == 'control'){
                 header('Location: ../view/Empleados_insertar.php?back=control');
+            }
+            if($datos->insertar_cargo == ''){
+                header('Location: ../view/Empleados_insertar.php');
             }
         }
         

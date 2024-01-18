@@ -175,7 +175,7 @@
             <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <div class="option" id="select">
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
-                    <label>
+                    <label id="select">
                         <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
                         <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo ?>
                     </label>
@@ -337,13 +337,16 @@
 <script>
     const radios = document.querySelectorAll('input[name="id_empleado"]');
     const busquedaInput = document.getElementById('id_empleado');
-    const select = document.getElementById("select");
+    const gs = document.getElementById('select');
 
     radios.forEach(radio => {
         radio.addEventListener('change', (event) => {
             const label = event.target.parentElement;
             const labelText = label.textContent.trim();
             busquedaInput.value = labelText;
+
+            // Cambiar el estilo del elemento con id "group_s" a "visible: hidden"
+            gs.style.visibility = 'hidden';
         });
     });
 
@@ -360,5 +363,8 @@
                 label.style.display = 'none';
             }
         });
+
+        // Restaurar la visibilidad al elemento con id "group_s" cuando se modifica la entrada
+        gs.style.visibility = 'visible';
     });
 </script>

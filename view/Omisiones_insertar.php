@@ -80,7 +80,7 @@
     <div class="container-camps">
         <div class="select" style="width: 100%;">
             <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
-            <div class="option" >
+            <div class="option" id="select">
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
                 <label>
                 <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
@@ -186,27 +186,34 @@
 <script>
     const radios = document.querySelectorAll('input[name="id_empleado"]');
     const busquedaInput = document.getElementById('id_empleado');
+    const gs = document.getElementById('select');
 
     radios.forEach(radio => {
-    radio.addEventListener('change', (event) => {
-        const label = event.target.parentElement;
-        const labelText = label.textContent.trim();
-        busquedaInput.value = labelText;
-    });
+        radio.addEventListener('change', (event) => {
+            const label = event.target.parentElement;
+            const labelText = label.textContent.trim();
+            busquedaInput.value = labelText;
+
+            // Cambiar el estilo del elemento con id "group_s" a "visible: hidden"
+            gs.style.visibility = 'hidden';
+        });
     });
 
     busquedaInput.addEventListener('input', () => {
-    const searchTerm = busquedaInput.value.toLowerCase();
+        const searchTerm = busquedaInput.value.toLowerCase();
 
-    radios.forEach(radio => {
-        const label = radio.parentElement;
-        const optionText = label.textContent.toLowerCase();
+        radios.forEach(radio => {
+            const label = radio.parentElement;
+            const optionText = label.textContent.toLowerCase();
 
-        if (optionText.includes(searchTerm)) {
-        label.style.display = 'block';
-        } else {
-        label.style.display = 'none';
-        }
+            if (optionText.includes(searchTerm)) {
+                label.style.display = 'block';
+            } else {
+                label.style.display = 'none';
+            }
+        });
+
+        // Restaurar la visibilidad al elemento con id "group_s" cuando se modifica la entrada
+        gs.style.visibility = 'visible';
     });
-    });
-  </script>
+</script>

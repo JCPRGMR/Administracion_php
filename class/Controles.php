@@ -45,7 +45,7 @@
             }
         }
         public static function Insertar_Salida(object $post){
-            self::Validar_control($post->id_empleado);
+            //self::Validar_control($post->id_empleado);
             try {
                 $sql = "INSERT INTO controles(
                     salida,

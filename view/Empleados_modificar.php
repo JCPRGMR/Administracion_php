@@ -55,9 +55,9 @@
             <div class="select-w-btn">
                 <label for="" class="w-t">Area</label>
                 <select name="area" id="area" class="campo">
-                    <option value="<?= $empleado->id_fk_area ?>" hidden><?= $empleado->id_fk_area ?><?= $empleado->des_area ?></option>
+                    <option value="<?= (is_null($empleado->id_fk_area))? 0 : $empleado->id_fk_area ; ?>" hidden><?= $empleado->des_area ?></option>
                     <?php foreach(Areas::Mostrar() as $item): ?>
-                    <option value="<?= $item->id_area ?>"><?= $item->id_area ?><?= $item->des_area ?></option>
+                    <option value="<?= $item->id_area ?>"><?= $item->des_area ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

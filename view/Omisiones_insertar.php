@@ -75,7 +75,7 @@
 </style>
 <form action="../request/Omisiones.php" method="post" class="form">
     <div class="p20 uper-bold">
-        Registro de omision
+        Formulario de omision
     </div>
     <div class="container-camps">
         <div class="select" style="width: 100%;">

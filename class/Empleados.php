@@ -114,6 +114,9 @@
                 header("Location: ../view/Empleados.php");
             } catch (PDOException $th) {
                 echo $th->getMessage();
+                echo '<br>';
+                echo '<pre>';
+                var_dump($datos);
             }
         }
         public static function Eliminar(object $datos){
@@ -138,7 +141,7 @@
                 echo '<br>';
                 echo '- El empleado tiene una cuenta de usuario';
                 echo '<br>';
-                echo '- El empleado tiene registro en omision o controles';
+                echo '- El empleado tiene registros en omision o controles';
                 echo '<br>';
                 echo '<br>';
                 echo '<strong>Por favor comuniquese con sistemas</strong>';

@@ -74,7 +74,7 @@
 </style>
 <form action="../request/Usuarios.php" method="post" class="form">
     <div class="p20 uper-bold">
-        Asignar cuenta de usuario
+        Asignar usuario a personal
     </div>
     <div class="container-camps">
         <div class="input-w-t">

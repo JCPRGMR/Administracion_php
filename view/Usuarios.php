@@ -119,7 +119,7 @@
         <tbody>
             <?php foreach(Usuarios::Mostrar() as $item): ?>
             <tr>
-                <td align="center" class="p10"><?= $item->nombres ?></td>
+                <td align="center" class="p10"><?= $item->nombres . ' ' . $item->apellidos ?></td>
                 <td align="center" class="p10"><?= $item->usuario ?></td>
                 <td align="center" class="p10"><?= $item->contrasena ?></td>
                 <td align="center" class="p10"><?= $item->des_rol ?></td>

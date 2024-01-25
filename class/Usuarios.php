@@ -3,10 +3,13 @@
     class Usuarios extends Conexion{
         public static function Insertar(object $datos){
             try {
-                if(!self::Contrasena_existe($datos->contrasena)){
+                if(self::Contrasena_existe($datos->Contrasena)){
+                    // Contraseña existe, redireccionar a Usuarios.php
                     header('Location: ../view/Usuarios.php');
-                }else{
-                    $sql = "INSERT INTO usuarios
+                    return;
+                }
+        
+                $sql = "INSERT INTO usuarios
                     (
                     usuario,
                     contrasena,
@@ -20,29 +23,43 @@
                     ?,
                     ?,
                     ?,
-    
                     ?,
                     ?,
                     ?);";
-                    $stmt = Conexion::Conectar()->prepare($sql);
-                    $stmt->bindParam(1, $datos->nombres, PDO::PARAM_STR);
-                    $stmt->bindParam(2, $datos->Contrasena, PDO::PARAM_STR);
-                    $stmt->bindParam(3, $datos->rol, PDO::PARAM_INT);
-                    $stmt->bindParam(4, $datos->id_empleado, PDO::PARAM_INT);
-                    $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
-                    $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
-                    $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
-                    $stmt->execute();
-                    header('Location: ../view/Usuarios.php');
-                }
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $datos->nombres, PDO::PARAM_STR);
+                $stmt->bindParam(2, $datos->Contrasena, PDO::PARAM_STR);
+                $stmt->bindParam(3, $datos->rol, PDO::PARAM_INT);
+                $stmt->bindParam(4, $datos->id_empleado, PDO::PARAM_INT);
+                $stmt->bindParam(5, date('Y-m-d'), PDO::PARAM_STR);
+                $stmt->bindParam(6, date('H:i:s'), PDO::PARAM_STR);
+                $stmt->bindParam(7, date('Y-m-d H:i:s'), PDO::PARAM_STR);
+                $stmt->execute();
+                
+                // Después de la inserción, redireccionar a Usuarios.php
+                header('Location: ../view/Usuarios.php');
             } catch (PDOException $th) {
-                echo $th->getMessage();
-                echo '<br>';
-                echo '<pre>';
-                var_dump($datos);
-                // header('Location: ../view/Usuarios.php');
+                // Manejar el error, si es necesario
+                header('Location: ../view/Usuarios.php');
             }
         }
+        
+        public static function Contrasena_existe($contrasena){
+            try {
+                $sql = "SELECT * FROM usuarios WHERE contrasena = ?";
+                $stmt = Conexion::Conectar()->prepare($sql);
+                $stmt->bindParam(1, $contrasena, PDO::PARAM_STR);
+                $stmt->execute();
+                $res = $stmt->fetch(PDO::FETCH_OBJ);
+                
+                // Si se encuentra una fila, la contraseña existe
+                return $res !== false;
+            } catch (PDOException $th) {
+                // Manejar el error, si es necesario
+                return false;
+            }
+        }
+        
         public static function Modificar(object $datos){}
         public static function Mostrar(){
             try {
@@ -89,18 +106,6 @@
             session_start();
             $_SESSION = array();
             session_destroy();
-        }
-        public static function Contrasena_existe($contrasena){
-            try {
-                $sql = "SELECT * FROM usuarios WHERE contrasena = ?";
-                $stmt = Conexion::Conectar()->prepare($sql);
-                $stmt->bindParam(1, $contrasena, PDO::PARAM_STR);
-                $stmt->execute();
-                $res = $stmt->fetch(PDO::FETCH_OBJ);
-                return  true;
-            } catch (PDOException $th) {
-                return false;
-            }
         }
     }
 ?>

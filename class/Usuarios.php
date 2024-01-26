@@ -86,7 +86,7 @@
                         session_start();
                         $_SESSION["usuario"] = $resultado;
                         $hola = 'Hola';
-                        header("Location: ../view/Control.php");
+                        header("Location: ../templates/header.php");
                     }else{
                         $msg =  'El usuario no existe';
                         header('Location: ../index.php');

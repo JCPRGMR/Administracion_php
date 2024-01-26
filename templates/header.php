@@ -8,6 +8,13 @@
     }
     main{
         overflow: auto;
+        z-index: 1;
+    }
+    header{
+        z-index: 2;
+    }
+    nav{
+        z-index: 3;
     }
 </style>
 <!DOCTYPE html>
@@ -38,10 +45,11 @@
                     <?= $_SESSION['usuario']->nombres ?>
                 </div>
                 <div class="user-pic pic-z30 p5">
+                    <img src="../img/rtp_icono.png" alt="">
                 </div>
             </label>
             <input type="checkbox" name="" id="user" class="on-menu-user ghost">
-                <div class="user-options">
+                <!-- <div class="user-options">
                     <div class="btn-w-i">
                         <div class="btn-icon p10">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -69,7 +77,7 @@
                         </div>
                         <div class="btn-text">Cerrar sesion</div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </header>
@@ -81,6 +89,14 @@
             </div>
             <ul class="container-list">
                 <?php if($_SESSION['usuario']->id_fk_area == 1): ?>
+                <a href="../view/Control.php">
+                    <li class="item-list">Ingreso y Salida de personal</li>
+                </a>
+                <?php endif; ?>
+                <?php if($_SESSION['usuario']->nombres == 'MAPI IRIS'): ?>
+                    <a href="../view/Omisiones.php">
+                        <li class="item-list">Omisiones, Permisos y Marcaciones</li>
+                    </a>
                     <a href="../view/Control.php">
                         <li class="item-list">Ingreso y Salida de personal</li>
                     </a>

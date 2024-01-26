@@ -79,7 +79,7 @@
     </div>
     <div class="container-camps">
         <div class="select" style="width: 100%;">
-            <input type="search" id="id_empleado" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
+            <input type="search" id="id_empleado" autocomplete="off" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <div class="option" id="select">
                 <?php foreach (Empleados::Mostrar() as $item) : ?>
                 <label>

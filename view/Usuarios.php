@@ -110,7 +110,7 @@
 <div class="tabla">
     <table border="1" id="myTable">
         <thead>
-            <th class="uper-bold bg-black-blue">Empleado</th>
+            <th class="uper-bold bg-black-blue">PERSONAL</th>
             <th class="uper-bold bg-black-blue">Usuario</th>
             <th class="uper-bold bg-black-blue">Contraseña</th>
             <th class="uper-bold bg-black-blue">Rol</th>
@@ -124,20 +124,6 @@
                 <td align="center" class="p10"><?= $item->contrasena ?></td>
                 <td align="center" class="p10"><?= $item->des_rol ?></td>
                 <td>
-                    <!-- <form action="" method="post" class="">
-                        <button type="submit" class="btn-small bg-black-blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-exclamation" viewBox="0 0 16 16">
-                                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-                                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1.5a.5.5 0 0 0 1 0V11a.5.5 0 0 0-.5-.5m0 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
-                            </svg>
-                        </button>
-                        <button type="submit" class="btn-small bg-black-blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
-                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"/>
-                            </svg>
-                        </button>
-                    </form> -->
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -153,7 +139,6 @@
         tr = tbody.getElementsByTagName("tr");
 
         for (i = 0; i < tr.length; i++) {
-            // Modifica el bucle para recorrer todas las celdas (td) en lugar de solo la primera
             var showRow = false;
             for (var j = 0; j < tr[i].cells.length; j++) {
             td = tr[i].cells[j];
@@ -161,7 +146,7 @@
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                 showRow = true;
-                break; // Rompe el bucle si se encuentra una coincidencia en cualquier celda
+                break;
                 }
             }
             }

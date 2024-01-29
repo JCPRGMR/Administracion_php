@@ -81,12 +81,22 @@
         <div class="select" style="width: 100%;">
             <input type="search" id="id_empleado" autocomplete="off" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <div class="option" id="select">
-                <?php foreach (Empleados::Mostrar() as $item) : ?>
-                <label>
-                <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
-                <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
-                </label>
-                <?php endforeach ?>
+                
+                <?php if($_SESSION['usuario']->des_rol == 'Administrador'): ?>
+                    <?php foreach(Empleados::Mostrar() as $item):?>
+                    <label>
+                        <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
+                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
+                    </label>
+                    <?php endforeach;?>
+                <?php else:?>
+                    <?php foreach(Empleados::Mostrar_Area($_SESSION['usuario']->id_fk_area) as $item):?>
+                    <label>
+                        <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
+                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_cargo?>
+                    </label>
+                    <?php endforeach;?>
+                <?php endif;?>
             </div>
             <a href="Empleados_insertar.php?back=omision" class="w-btn bg-black-blue" style="white-space: nowrap;">+</a>
         </div>

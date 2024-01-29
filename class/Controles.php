@@ -118,7 +118,7 @@
         }
         public static function Mostrar(){
             try {
-                $sql = "SELECT * FROM vista_controles WHERE f_registro_control = '". date('Y-m-d') ."' ORDER BY f_registro_control DESC, h_registro_control DESC";
+                $sql = "SELECT * FROM vista_controles ORDER BY f_registro_control DESC, h_registro_control DESC";
                 $stmt = Conexion::Conectar()->prepare($sql);
                 $stmt->execute();
                 $resultado = $stmt->fetchAll(PDO::FETCH_OBJ);

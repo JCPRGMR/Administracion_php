@@ -88,20 +88,22 @@
                 <img src="../img/rtp_logo_blanco.png" alt="">
             </div>
             <ul class="container-list">
-                <?php if($_SESSION['usuario']->id_fk_area == 1): ?>
+                <?php if($_SESSION['usuario']->des_rol == 'seguridad'): ?>
                 <a href="../view/Control.php">
                     <li class="item-list">Ingreso y Salida de personal</li>
                 </a>
-                <?php endif; ?>
-                <?php if($_SESSION['usuario']->nombres == 'MAPI IRIS'): ?>
+                <?php elseif($_SESSION['usuario']->id_rol == 2 && $_SESSION['usuario']->nombres != 'MAPI IRIS'): ?>
+                    <a href="../view/Omisiones.php">
+                        <li class="item-list">Omisiones, Permisos y Marcaciones</li>
+                    </a>
+                <?php elseif($_SESSION['usuario']->nombres == 'MAPI IRIS'): ?>
                     <a href="../view/Omisiones.php">
                         <li class="item-list">Omisiones, Permisos y Marcaciones</li>
                     </a>
                     <a href="../view/Control.php">
                         <li class="item-list">Ingreso y Salida de personal</li>
                     </a>
-                <?php endif; ?>
-                <?php if($_SESSION['usuario']->des_rol == 'Administrador'): ?>
+                <?php elseif($_SESSION['usuario']->des_rol == 'Administrador'): ?>
                     <a href="../view/Omisiones.php">
                         <li class="item-list">Omisiones, Permisos y Marcaciones</li>
                     </a>

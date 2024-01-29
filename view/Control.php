@@ -281,7 +281,8 @@
                         <td><?= $item->f_registro_control ?></td>
                     </tr>
                 <?php endforeach; ?>
-            <?php else : ?>
+            <?php endif; ?>
+            <?php if ($_SESSION['usuario']->des_rol == 'Administrador') : ?>
                 <?php foreach (Controles::Mostrar() as $item) : ?>
                     <tr>
                         <td><?= $item->des_ciudad ?></td>

@@ -8,7 +8,7 @@
 <style>
     body{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 11px;
+        font-size: 10px;
     }
     table{
         border-collapse: collapse;

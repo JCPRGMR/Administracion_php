@@ -108,7 +108,7 @@
             <input type="date" name="fin" id="fin" class="campo" placeholder="Nombres">
         </div>
         <br>
-        <button type="submit" class="btn">
+        <button type="submit" class="btn" onclick="window.history.back()">
             VISTA PREVIA DEL PDF
         </button>
     </div>

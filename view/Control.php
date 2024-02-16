@@ -177,7 +177,7 @@
             <input type="search" id="id_empleado" autocomplete="off" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <!-- VALIDADOR SI DNA MAPI ACCEDIO AL SISTEMA NO PUEDE INSERTAR NI BUSCAR PARA INSERTAR PERO SI PUEDE
                 BUSCAR EN LA TABLA -->
-            <?php if($_SESSION['usuario']->nombres != 'MAPI IRIS' || $_SESSION['usuario']->des_rol == 'Administrador' ): ?>
+            <?php if($_SESSION['usuario']->des_rol != 'Reportes' || $_SESSION['usuario']->des_rol == 'Administrador' ): ?>
                 <div class="option" id="select">
                     <?php foreach (Empleados::Mostrar() as $item) : ?>
                         <label id="select">
@@ -282,14 +282,14 @@
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
-            <?php if ($_SESSION['usuario']->des_rol == 'Administrador') : ?>
+            <?php if ($_SESSION['usuario']->des_rol == 'Administrador' || $_SESSION['usuario']->des_rol == 'Reportes') : ?>
                 <?php foreach (Controles::Mostrar() as $item) : ?>
                     <tr>
                         <td><?= $item->des_ciudad ?></td>
                         <td><?= $item->nombres . ' ' . $item->apellidos ?></td>
                         <td><?= $item->des_area ?></td>
                         <td>
-                            <?php if (is_null($item->ingreso)) : ?>
+                            <?php if ($_SESSION['usuario']->des_rol == 'seguridad' && is_null($item->ingreso)) : ?>
                                 <form action="../request/Controles.php" method="post">
                                     <button type="submit" name="id_ingreso" value="<?= $item->id_control ?>">
                                         Agregar ingreso
@@ -301,7 +301,7 @@
                         </td>
                         <td class="obs"><?= $item->obs_ingreso ?></td>
                         <td>
-                            <?php if (is_null($item->salida)) : ?>
+                            <?php if ($_SESSION['usuario']->des_rol == 'seguridad' && is_null($item->salida)) : ?>
                                 <form action="../request/Controles.php" method="post">
                                     <button type="submit" name="id_salida" value="<?= $item->id_control ?>">
                                         Agregar salida
@@ -355,11 +355,10 @@
             const label = event.target.parentElement;
             const labelText = label.textContent.trim();
             busquedaInput.value = labelText;
-
-            // Cambiar el estilo del elemento con id "group_s" a "visible: hidden"
             gs.style.visibility = 'hidden';
         });
     });
+    
 
     busquedaInput.addEventListener('input', () => {
         const searchTerm = busquedaInput.value.toLowerCase();
@@ -374,8 +373,6 @@
                 label.style.display = 'none';
             }
         });
-
-        // Restaurar la visibilidad al elemento con id "group_s" cuando se modifica la entrada
         gs.style.visibility = 'visible';
     });
 </script>

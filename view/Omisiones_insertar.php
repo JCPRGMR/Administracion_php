@@ -81,7 +81,6 @@
         <div class="select" style="width: 100%;">
             <input type="search" id="id_empleado" autocomplete="off" placeholder="Buscar empleados" class="campo" list="false" style="width: 100%;">
             <div class="option" id="select">
-                
                 <?php if($_SESSION['usuario']->des_rol == 'Administrador'): ?>
                     <?php foreach(Empleados::Mostrar() as $item):?>
                     <label>
@@ -93,7 +92,7 @@
                     <?php foreach(Empleados::Mostrar_Area($_SESSION['usuario']->id_fk_area) as $item):?>
                     <label>
                         <input type="radio" name="id_empleado" class="itemxd" id="opcion" value="<?= $item->id_empleado ?>">
-                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_cargo?>
+                        <?= $item->nombres . ' ' . $item->apellidos . ' | ' . $item->des_area . ' | ' . $item->des_cargo?>
                     </label>
                     <?php endforeach;?>
                 <?php endif;?>
@@ -119,7 +118,7 @@
             <label for="" class="w-t bg-black-blue" style="white-space: nowrap;">
                 Tiempo
             </label>
-            <input type="number" name="tiempo" id="tiempo" class="campo" required max="59" maxlength="2">
+            <input type="number" name="tiempo" id="tiempo" class="campo" max="59" maxlength="2">
             <select name="medida" id="" class="campo w-t bg-black-blue">
                 <option value="minuto(s)">Minutos</option>
                 <option value="hora(s)">Horas</option>

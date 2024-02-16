@@ -92,11 +92,11 @@
                 <a href="../view/Control.php">
                     <li class="item-list">Ingreso y Salida de personal</li>
                 </a>
-                <?php elseif($_SESSION['usuario']->id_rol == 2 && $_SESSION['usuario']->nombres != 'MAPI IRIS'): ?>
+                <?php elseif($_SESSION['usuario']->id_rol == 2 && $_SESSION['usuario']->des_rol != 'Reportes'): ?>
                     <a href="../view/Omisiones.php">
                         <li class="item-list">Omisiones, Permisos y Marcaciones</li>
                     </a>
-                <?php elseif($_SESSION['usuario']->nombres == 'MAPI IRIS'): ?>
+                <?php elseif($_SESSION['usuario']->des_rol == 'Reportes'): ?>
                     <a href="../view/Omisiones.php">
                         <li class="item-list">Omisiones, Permisos y Marcaciones</li>
                     </a>

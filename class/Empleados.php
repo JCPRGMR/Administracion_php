@@ -4,8 +4,6 @@
     require '../vendor/autoload.php';
 
     use PhpOffice\PhpSpreadsheet\IOFactory;
-    use PhpOffice\PhpSpreadsheet\Spreadsheet;
-    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
     require_once("../connection/Conexion.php");
     require_once("../class/Cargos.php");

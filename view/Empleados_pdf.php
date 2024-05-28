@@ -6,7 +6,6 @@
 <title>
     <?= date('Y-m-d_H:i:s') ?>.pdf
 </title>
-<!-- <link rel="stylesheet" href="../css/styles2.css"> -->
 <style>
     .tabla{
         font-family: Arial, Helvetica, sans-serif;

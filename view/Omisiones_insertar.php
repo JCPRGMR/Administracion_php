@@ -73,9 +73,15 @@
         align-items: center;
     }
 </style>
+<input type="checkbox" name="" id="programar" style="position: absolute; visibility: hidden;">
+<div class="modal">
+    
+</div>
 <form action="../request/Omisiones.php" method="post" class="form">
-    <div class="p20 uper-bold">
+    <div class="p20 uper-bold" style="display: flex; justify-content: space-between;">
         Formulario de omision
+        <label for="programar" class="bg-black-blue w-btn" style="cursor: pointer; border-radius: 10px;">Programar</label>
+
     </div>
     <div class="container-camps">
         <div class="select" style="width: 100%;">
